@@ -11,7 +11,7 @@ The colorscheme of almost all these dotfiles is
 inspired by atom's onedark.
 
 ## Info
-* Fedora is the daily desktop distro
+* Fedora is the daily desktop distro I use
 * Sway is the compositor
 	* I use waybar as the status bar for sway
 * Neovim is the text editor
