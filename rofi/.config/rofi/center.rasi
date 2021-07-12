@@ -1,0 +1,170 @@
+configuration {
+	modi: "window,drun,run,combi";
+	font: "Hack Nerd Font 13 ";
+	display-combi: "Launch";
+	combi-hide-mode-prefix: true;
+}
+
+/* global settings and color variables */
+* {
+	blue:             #88C0D0;
+	darkblue:         #B48EAD;
+	cyan:             #95e6cb;
+	orange:           #D08770;
+	green:            #A3BE8C;
+	red:              #BF616A;
+	blue:			  #5E81AC;
+	
+
+	background-alternative-color: #4C566A;
+	background-color: #3b4252;
+	border-color:     @blue;
+	text-color:       #D9DDE9;
+	main-color:       @cyan;
+	highlight:        #D9DDE9;
+	urgent-color:     @red;
+	selected-color:   @orange;
+}
+
+window {
+	background-color: @background-color;
+	/*width: 640px;*/
+	anchor: north east;
+	location: north east;
+	children:[mainbox];
+	orientation: vertical;
+	padding: 10px;
+	fullscreen: false;
+	border:  2px;
+	border-radius: 0px;
+	border-color: @border-color;
+	width: 450px;
+	height: 250px;
+}
+
+mainbox {
+	background-color: @background-color;
+	spacing:0px;
+}
+
+message {
+	padding: 6px 10px;
+	background-color: @background-color;
+}
+
+textbox {
+	text-color: @text-color;
+	background-color:@background-color;
+}
+
+listview {
+	fixed-height: true;
+	dynamic: true;
+	scrollbar: false;
+	spacing: 0px;
+	padding: 1px 0px 0px 0px;
+	margin: 0px 0px 1px 0px;
+	background: @background-color;
+	layout: vertical;
+}
+
+element {
+   padding: 4px 10px;
+}
+
+element normal.normal {
+   padding: 0px 15px;
+   background-color: @background-color;
+   text-color: @text-color;
+}
+
+element normal.urgent {
+   background-color: @background-color;
+   text-color: @urgent-color;
+}
+
+element normal.active {
+   background-color: @background-color;
+   text-color: @main-color;
+}
+
+element selected.normal {
+    background-color: @background-alternative-color;
+    text-color:       @selected-color;
+}
+
+element selected.urgent {
+    background-color: @urgent-color;
+    text-color:       @background-color;
+}
+
+element selected.active {
+    background-color: @background-alternative-color;
+    text-color:       @green;
+}
+
+element alternate.normal {
+    background-color: @background-color;
+    text-color:       @text-color;
+}
+
+element alternate.urgent {
+    background-color: @background-color;
+    text-color:       @urgent-color;
+}
+
+element alternate.active {
+    background-color: @background-color;
+    text-color:       @main-color;
+}
+
+scrollbar {
+   background-color: @background-color;
+   handle-color: @background-color;
+   handle-width: 0px;
+}
+
+mode-switcher {
+   background-color: @background-color;
+}
+
+button {
+   background-color: @background-color;
+   text-color:       @text-color;
+}
+
+button selected {
+    text-color:       @main-color;
+}
+
+inputbar {
+   background-color: @background-color;
+   spacing: 0px;
+   children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+
+prompt {
+   padding:0px 10px;
+   background-color: @background-color;
+   text-color: @highlight;
+}
+
+entry {
+   padding:0px 6px;
+   background-color:@background-color;
+}
+
+case-indicator {
+   padding:6px 10px;
+   text-color:@main-color;
+   background-color:@background-color;
+}
+
+#textbox-prompt-colon {
+	padding:0px 0px;
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @highlight;
+    background-color:@background-color;
+}

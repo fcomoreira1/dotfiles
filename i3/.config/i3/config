@@ -1,0 +1,216 @@
+set $mod Mod4
+set $alt Mod1
+
+bindsym $mod+a focus parent
+bindsym $mod+c focus child
+
+bindsym $mod+minus split h
+bindsym $mod+BackSpace split v
+bindsym $mod+equal layout toggle split
+bindsym $mod+t layout tabbed
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Tab focus mode_toggle 
+bindsym $mod+space floating toggle
+
+bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move to scratchpad
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+bindsym $mod+$alt+1 move container to workspace number $ws1; workspace number $ws1  
+bindsym $mod+$alt+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+$alt+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+$alt+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+$alt+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+$alt+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+$alt+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+$alt+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+$alt+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+$alt+0 move container to workspace number $ws10; workspace number $ws10
+
+
+for_window [class="Spotify"] move container to workspace $ws5
+assign [class="discord"] 6
+assign [class="zoom"] 6
+assign [class="Wine"] 8
+
+##############################################################
+# Launch apps
+###############################################################
+
+bindsym $mod+Return exec --no-startup-id  alacritty -e fish
+bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
+bindsym $mod+i exec brave-browser 
+bindsym $mod+Shift+i exec brave-browser --incognito
+bindsym $mod+d exec dash /home/fcomoreira/scripts/menu.sh -run
+bindsym $mod+w exec dash /home/fcomoreira/scripts/menu.sh -window
+bindsym $mod+Shift+w exec bash ~/scripts/wifirofi.sh
+bindsym $mod+Shift+p exec --no-startup-id ~/.config/polybar/launch.sh
+bindsym $mod+n exec nautilus 
+
+###############################################################
+# Session Management
+###############################################################
+
+bindsym $mod+Shift+d exec notify-send "DUNST_COMMAND_TOGGLE"
+bindsym $mod+Escape exec "bash -c /home/fcomoreira/scripts/powermenu.sh"
+bindsym $mod+Shift+q kill
+bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id  kill -9 $(xdotool getwindowfocus getwindowpid)
+bindsym $mod+Shift+c reload
+bindsym $mod+Ctrl+r restart
+
+####################################################
+# Fix some functions keys that were now properly working
+####################################################
+
+bindsym Print exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh
+bindsym F12   exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh -s
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/fcomoreira/scripts/volume.sh -i 
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/fcomoreira/scripts/volume.sh -d
+bindsym XF86AudioMute exec --no-startup-id /home/fcomoreira/scripts/volume.sh -m
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+bindsym XF86AudioNext       exec --no-startup-id playerctl next
+bindsym XF86AudioPrev       exec --no-startup-id playerctl previous
+bindsym XF86AudioPlay       exec --no-startup-id /home/fcomoreira/scripts/pausemenu.sh
+
+###############################################################
+# i3 Modes 
+###############################################################
+
+mode "Resize Mode" {
+
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+
+        bindsym Shift+h resize shrink width 10 px or 10 ppt
+        bindsym Shift+k resize grow height 10 px or 10 ppt
+        bindsym Shift+j resize shrink height 10 px or 10 ppt
+        bindsym Shift+l resize grow width 10 px or 10 ppt
+
+        bindsym minus gaps inner current minus 6
+        bindsym plus gaps inner current plus 6
+        bindsym Shift+minus gaps inner current minus 12
+        bindsym Shift+plus gaps inner current plus 12
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "Resize Mode"
+
+###############################################################
+# External programs on startup
+###############################################################
+
+exec --no-startup-id picom -b
+exec --no-startup-id light -N 30
+exec --no-startup-id dunst &
+exec --no-startup-id unclutter --ignore-scrolling -b
+exec_always --no-startup-id /usr/libexec/xfce-polkit
+
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id setxkbmap -layout us,br -option grp:shift_toggle
+
+###############################################################
+# i3 Appearance and Behavior
+###############################################################
+
+set $wm_color_border_active_bg       #3b84c0
+set $wm_color_border_active_fg       #353b45
+set $wm_color_border_inactive_bg     #353b45
+set $wm_color_border_inactive_fg     #e6efff
+set $wm_color_background             #2E3440
+
+# Window Border color
+# class                 border                       background                   text                         indicator                    child_border
+client.focused          $wm_color_border_active_bg   $wm_color_border_active_bg   $wm_color_border_active_fg   $wm_color_border_active_bg   $wm_color_border_active_bg
+client.focused_inactive $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.unfocused        $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.urgent           $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.placeholder      $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.background       $wm_color_background
+
+font pango:JetBrains Medium 12
+default_border pixel 3
+default_floating_border pixel 3 
+gaps inner 7
+gaps outer 3 
+
+popup_during_fullscreen smart 
+focus_follows_mouse yes 
+
+# Cause Settings app to float above tiled windows
+floating_maximum_size -1 x -1
+floating_modifier $mod
+hide_edge_borders none
+
+bar {
+    status_command i3status
+	tray_output primary
+	position top
+	font pango:JetBrains Medium 11
+	separator_symbol " | "
+	workspace_min_width 30
+	colors {
+		background #1e222a
+		statusline #abb2bf
+		separator #4C566A
+
+		focused_workspace #5e81ac #5e81ac #e6efff 
+		active_workspace #282c34 #282c34 #e6efff 
+		inactive_workspace #282c34 #282c34 #e5c07b 
+		urgent_workspace #e06c75 #e06c75 #e6efff
+		binding_mode #56b6c2 #56b6c2 #1e222a
+
+	}
+}

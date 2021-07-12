@@ -1,0 +1,365 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[global/wm]
+margin-top = 0 
+margin-bottom = 0
+
+[settings]
+format-underline =
+format-overline =
+format-spacing =
+format-padding =
+format-margin =
+format-offset =
+
+[colors]
+background = #1e222a
+background2 = #282c34
+foreground = #abb2bf
+primary = #56b6c2
+secondary = #5e81ac
+gray = #4C566A
+orange = #d19a66
+green = #98c379
+red = #e06c75
+yellow= #e5c07b
+magenta = #c678dd
+alert = #e06c75
+
+[bar/mybar]
+width = 100%
+height = 23 
+fixed-center = true
+bottom = false 
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+enable-ipc = true
+
+line-size = 2
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0 
+
+;module-margin-left = 2 
+;module-margin-right = 2 
+
+font-0 = NotoSans Nerd Font:style=Medium:size=11.6;2 
+font-1 = NotoSans Nerd Font:style=Medium:size=10;2
+font-2 = PowerlineSymbols:style=Medium:size=28;8
+	font-3 = NotoSans Nerd Font:style=Medium:size=13;3
+
+modules-left = separator1 i3 separator2 xwindow 
+modules-center =  
+modules-right = player-mpris-tail separator1 pulseaudio separator2 separator1 wifi separator2 separator1 battery separator2 separator1 date separator2
+
+
+tray-position = right
+tray-padding = 2
+;tray-background = ${colors.alert}
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/separator2]
+type = custom/text
+content-foreground = ${colors.background2}
+content-font = 4
+content = ""
+
+[module/separator1]
+type = custom/text
+content-foreground = ${colors.background2}
+content-font = 4
+content = ""
+
+
+;============================================
+;	      I3 Module
+;============================================
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode-padding = 1 
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+;ws-icon-0 = 1;%{T1} 1 %{T-}: 
+;ws-icon-1 = 2;%{T1} 2 %{T-}: 
+;ws-icon-2 = 3;%{T1} 3 %{T-}: 
+;ws-icon-3 = 4;%{T1} 4 %{T-}: 
+;ws-icon-4 = 5;%{T1} 5 %{T-}: 
+;ws-icon-5 = 6;%{T1} 6 %{T-}: 
+;ws-icon-6 = 7;%{T1} 7 %{T-}: 
+;ws-icon-7 = 8;%{T1} 8 %{T-}: 
+;ws-icon-8 = 9;%{T1} 9 %{T-}: 
+;ws-icon-default = 
+
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;10
+
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${colors.background2}
+label-focused-foreground = ${colors.yellow}
+label-focused-underline= ${colors.background2}
+label-focused-padding = 3 
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-background = ${self.label-focused-background}
+label-unfocused-padding = 3
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3 
+
+;============================================
+;               Title
+;============================================
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+label-foreground = ${colors.primary} 
+label-background = ${colors.background}
+label-padding-left = 0 
+;============================================
+;                Date Module
+;============================================
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %b %d"
+
+time = %H:%M
+format-prefix = 
+label = %date% %time%
+label-foreground = ${colors.red}
+label-background = ${colors.background2}
+;=============================================
+;             SPOTIFY SCRIPT
+;=============================================
+
+[module/playerctl]
+type = custom/script
+exec = playerctl metadata --format "{{artist}} - {{title}}"
+tail = true 
+format-prefix-font = 2
+format-prefix = "  "
+format-foreground = ${colors.secondary}
+format-background = ${colors.background2}
+
+[module/player-mpris-tail]
+type = custom/script
+;format-prefix = ""
+;format-prefix-font = 4
+;format-prefix-background = ${colors.background}
+;format-prefix-foreground = ${colors.green}
+;format-foreground = ${colors.background}
+;format-background = ${colors.green}
+
+;exec = ~/.config/polybar/scripts/player-mpris-tail.py -f '{:artist:t18:{artist}:}{:artist: - :}{:t20:{title}:}  %{A1:~/.config/polybar/scripts/player-mpris-tail.py previous:}  %{A} %{A1:~/.config/polybar/scripts/player-mpris-tail.py play-pause:}{icon-reversed} %{A}%{A1:~/.config/polybar/scripts/player-mpris-tail.py next:}  %{A}  ' --icon-playing '' --icon-paused '' 
+format-prefix-font = 2 
+format-foreground = ${colors.secondary}
+format-background = ${colors.background}
+format-prefix = "  " 
+exec = ~/.config/polybar/scripts/player-mpris-tail.py -f '{:artist:t18:{artist}:}{:artist: - :}{:t20:{title}:}'
+tail = true
+
+;===========================================
+;               Keyboard Module
+;===========================================
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+blacklist-1 = caps lock
+
+;format-prefix-background = ${colors.green}
+;format-prefix-foreground = ${colors.secondary}
+;format-prefix = ""
+format-prefix-font = 4
+;format-background = ${colors.secondary}
+;format-foreground = ${colors.foreground}
+
+label-layout = "%{T12} %{T-} %layout%"
+label-indicator-padding = 2
+label-indicator-margin = 1
+;label-indicator-background = ${colors.secondary}
+;label-indicator-underline = ${colors.secondary}
+
+;============================================
+;                Volume Module
+;============================================
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume-prefix = "" 
+;format-volume-background = ${colors.secondary}
+;format-volume-foreground = ${colors.foreground}
+format-volume = "<ramp-volume> <label-volume>"
+label-volume =  %percentage%%
+format-volume-foreground = ${colors.orange}
+format-volume-background = ${colors.background2}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+
+;ramp-volume-0 =  
+;ramp-volume-1 = 
+;ramp-volume-2 = 
+
+format-muted-prefix = ""
+;format-muted-background = ${colors.secondary}
+;format-muted-foreground = ${colors.foreground}
+label-muted = Muted 
+
+;============================================
+;                Memory Module
+;============================================
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+format-prefix-background = ${colors.secondary} 
+;format-prefix = " "
+format-prefix-font = 4
+format-prefix-foreground = ${colors.primary}
+
+format-background = ${colors.primary}
+format-foreground = ${colors.background}
+
+label = " %percentage_used%%"
+
+;============================================
+;                 CPU Module
+;============================================
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+;format-foreground = ${colors.background}
+;format-background = ${colors.primary}
+label = " %percentage:1%%"
+
+;============================================
+;                Network Module
+;============================================
+[module/wifi]
+type = internal/network
+interface = wlp1s0
+interval = 1.0
+
+format-connected-prefix-font = 4
+format-connected-background = ${colors.background2}
+
+format-connected =  <label-connected>
+label-connected = "%{A1:~/scripts/wifirofi.sh:} %essid%%{A}"
+format-connected-foreground = ${colors.primary}
+
+format-disconnected-background = ${colors.background2}
+format-disconnected-font = 3
+label-disconnected-font = 3
+label-disconnected = "%{A1:bash ~/scripts/wifirofi.sh:}No Connection%{A}"
+
+;============================================
+;                Battery Module
+;============================================
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 99
+format-charging-foreground = ${colors.green}
+format-charging-background = ${colors.background2}
+format-charging = "  <label-charging>"
+;format-charging-foreground = ${colors.background}
+;format-charging-background = ${colors.alert}
+;format-charging-prefix-background = ${colors.orange}
+;format-charging-prefix-foreground = ${colors.alert}
+;format-charging-prefix = " "
+;format-charging-prefix-font = 4
+format-discharging-foreground = ${colors.yellow}
+format-discharging-background = ${colors.background2}
+format-discharging = "%{T5}<ramp-capacity>%{T-} <label-discharging>"
+;format-discharging-foreground = ${colors.background}
+;format-discharging-background = ${colors.alert}
+;format-discharging-prefix-background = ${colors.orange}
+;format-discharging-prefix-foreground = ${colors.alert}
+;format-discharging-prefix = " "
+;format-discharging-prefix-font = 4
+format-full-foreground = ${colors.green}
+format-full-background = ${colors.background2}
+format-full = "%{T5}<ramp-capacity>%{T-} <label-full>"
+;format-full-foreground = ${colors.background}
+;format-full-background = ${colors.alert}
+;format-full-prefix-background = ${colors.orange}
+;format-full-prefix-foreground = ${colors.alert}
+;format-full-prefix = ""
+;format-full-prefix-font = 4
+
+;ramp-capacity-0 = 
+;ramp-capacity-1 = 
+;ramp-capacity-2 = 
+;ramp-capacity-3 = 
+;ramp-capacity-4 = 
+
+ramp-capacity-0 = %{T5}%{T-}
+ramp-capacity-1 = %{T5}%{T-}   
+ramp-capacity-2 = %{T5}%{T-} 
+ramp-capacity-3 = %{T5}%{T-} 
+ramp-capacity-4 = %{T5}%{T-} 
+ramp-capacity-5 = %{T5}%{T-} 
+ramp-capacity-6 = %{T5}%{T-} 
+ramp-capacity-7 = %{T5}%{T-} 
+ramp-capacity-8 = %{T5}%{T-} 
+ramp-capacity-9 = %{T5}%{T-}
+ramp-capacity-10 =  %{T5}%{T-}
+;ramp-capacity-foreground = ${colors.foreground}

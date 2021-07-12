@@ -1,0 +1,77 @@
+// -*- mode: json -*-
+{
+	"layer": "bottom",
+	"position": "top",
+
+	"modules-left": [
+		"sway/workspaces",
+		"custom/right-arrow-dark",
+		"sway/mode"
+	],
+	"modules-center": [
+		
+	],
+	"modules-right": [
+        "custom/spotify",
+		"pulseaudio",
+		"battery",
+		"clock",
+		"tray",
+	],
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{name}"
+	},
+
+	"sway/mode": {
+	},
+
+   "custom/spotify": {
+        "format": "{}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "exec": "/home/fcomoreira/.config/waybar/mediaplayer.py", 
+        "exec-if": "pgrep spotify"
+    }, 
+
+	"clock": {
+		"format": "{:%a %H:%M %d/%m}",
+		"tooltip": false
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume:2}%",
+		"format-bluetooth": "{icon}  {volume}%",
+		"format-muted": "MUTE",
+		"format-icons": {
+			"headphones": "",
+			"default": [
+				"",
+				""
+			]
+		},
+		"scroll-step": 5,
+		"on-click": "pamixer -t",
+		"on-click-right": "pavucontrol"
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			"",
+		],
+		"format-charging": " {capacity}%",
+	},
+	"tray": {
+		"icon-size":18 
+	}
+}

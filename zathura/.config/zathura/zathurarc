@@ -1,0 +1,49 @@
+set font                        "JetBrainsMono Nerd Font 10"
+
+set default-bg                  "#282c34"
+set default-fg                  "#abb2bf"
+
+set statusbar-fg                "#abb2bf"
+set statusbar-bg                "#353b45"
+
+set index-bg                   "#282c34" 
+set index-fg                   "#e6efff" 
+set index-active-bg             "#61afef" 
+set index-active-fg             "#e6efff" 
+
+set inputbar-bg                 "#282c34"
+set inputbar-fg                 "#8FBCBB"
+
+set notification-bg             "#282c34"
+set notification-fg             "#8FBCBB"
+
+set notification-error-bg       "#282c34"
+set notification-error-fg       "#e06c75"
+
+set notification-warning-bg     "#282c34"
+set notification-warning-fg     "#e06c75"
+
+set highlight-color             "#EBCB8B"
+set highlight-active-color      "#81A1C1"
+
+set completion-bg               "#3B4252"
+set completion-fg               "#81A1C1"
+
+set completion-highlight-fg     "#56b6c2"
+set completion-highlight-bg     "#81A1C1"
+
+set recolor-lightcolor          "#282c34"
+set recolor-darkcolor           "#f8f8f2"
+
+set recolor                     "true"
+set recolor-keephue 			"true"
+set selection-clipboard clipboard
+set sandbox none
+
+map p print
+map r rotate
+map c recolor
+map + adjust_window width 
+map = zoom in
+
+set synctex true
