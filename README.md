@@ -1,8 +1,13 @@
 # Dotfiles
 
-This is a backup for my personal dotfiles. To install these files `stow` is
-needed, and simpling cloning the repo and running `stow */` should but
-everything in its proper place. The colorscheme of almost all these dotfiles is
+This is a backup for my personal dotfiles. 
+
+To install these files `stow` is
+needed, and simpling cloning the repo and running `stow */` inside the cloned
+dir should put
+everything in its proper place.
+
+The colorscheme of almost all these dotfiles is
 inspired by atom's onedark.
 
 ## Info
