@@ -6,9 +6,18 @@ let g:vimwiki_list = [{'path': '~/wiki', 'syntax': 'markdown',
 "let g:vimwiki_folding = 'expr'
 let g:vimwiki_markdown_link_ext = 1
 
+function! Math()
+    "" Define certain regions
+    syn region math start=/\$\$/ end=/\$\$/
+    syn match math_block '\$[^$].\{-}\$'
+
+    hi link math Statement
+    hi link math_block Function
+endfunction
+
+autocmd FileType vimwiki call Math()
 autocmd FileType vimwiki setlocal foldenable
-autocmd Filetype vimwiki syn region match start=/\\$\\$/ end=/\\$\\$/
-autocmd Filetype vimwiki syn match math '\\$[^$].\{-}\$'
+
 
 autocmd FileType vimwiki nnoremap <silent><leader>c :w <bar> :silent call OpenMarkdown(expand("%:p"))<CR>
 

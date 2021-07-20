@@ -19,7 +19,8 @@ local lspconfig = require'lspconfig'
 
 lspconfig.pyright.setup{}
 
-lspconfig.phpactor.setup{}
+-- lspconfig.phpactor.setup{}
+require'lspconfig'.intelephense.setup{}
 
 lspconfig.clangd.setup{}
 
