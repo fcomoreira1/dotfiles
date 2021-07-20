@@ -60,13 +60,13 @@ window#waybar {
     font-size: 15px;
 }
 
-#clock, #battery, #pulseaudio, #network {
+#clock, #battery, #pulseaudio, #network, #backlight {
 	background-color: @gray;
 	padding: 0px 10px;
 	margin: 5px 0px;
 }
 #clock {
-    color: @red;
+    color: @magenta;
     border-radius: 0px 5px 5px 0px;
     margin-right: 10px;
 }
@@ -76,6 +76,9 @@ window#waybar {
 	padding:0px 8px;
 	border-radius:5px;
 	margin-right: 7px;
+}
+#backlight{
+    color: @red;
 }
 
 #battery {
