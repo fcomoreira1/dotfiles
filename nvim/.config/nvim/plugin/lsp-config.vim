@@ -2,7 +2,7 @@
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <leader>aa  <cmd>lua vim.lsp.buf.code_action<CR>
+nnoremap <leader>ca  <cmd>lua vim.lsp.buf.code_action<CR>
 nnoremap <leader>rr <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
@@ -20,6 +20,8 @@ local lspconfig = require'lspconfig'
 lspconfig.pyright.setup{}
 
 -- lspconfig.phpactor.setup{}
+require "lsp_signature".setup()
+
 require'lspconfig'.intelephense.setup{}
 
 lspconfig.clangd.setup{}
