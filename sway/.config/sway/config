@@ -16,8 +16,8 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term alacritty
-set $browser brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland 
-# set $browser brave-browser
+# set $browser brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland 
+set $browser brave-browser
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -78,6 +78,7 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
     bindsym $mod+Shift+q kill
     bindsym $mod+d exec $menu -run
     bindsym $mod+w exec $menu -window
+    bindsym $mod+Shift+w exec /home/fcomoreira/scripts/wifimenu.sh
 
 	bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
 	bindsym $mod+i exec $browser 
@@ -99,64 +100,64 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
     bindsym $mod+Shift+c reload
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-# Dunst:
-	bindsym $alt+space exec dunstctl close
-	bindsym $alt+grave exec dunstctl history-pop
-	bindsym $alt+p exec dunstctl toggle
+    # Dunst:
+	    bindsym $alt+space exec dunstctl close
+        bindsym $alt+grave exec dunstctl history-pop
+        bindsym $alt+p exec dunstctl toggle
 
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    # Moving around:
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+        # Move your focus around
+        bindsym $mod+$left focus left
+        bindsym $mod+$down focus down
+        bindsym $mod+$up focus up
+        bindsym $mod+$right focus right
 
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+        # Move the focused window with the same, but add Shift
+        bindsym $mod+Shift+$left move left
+        bindsym $mod+Shift+$down move down
+        bindsym $mod+Shift+$up move up
+        bindsym $mod+Shift+$right move right
 
-	bindsym $mod+$alt+1 move container to workspace number 1, workspace number 1 
-	bindsym $mod+$alt+2 move container to workspace number 2, workspace number 2
-	bindsym $mod+$alt+3 move container to workspace number 3, workspace number 3
-	bindsym $mod+$alt+4 move container to workspace number 4, workspace number 4
-	bindsym $mod+$alt+5 move container to workspace number 5, workspace number 5
-	bindsym $mod+$alt+6 move container to workspace number 6, workspace number 6
-	bindsym $mod+$alt+7 move container to workspace number 7, workspace number 7
-	bindsym $mod+$alt+8 move container to workspace number 8, workspace number 8
-	bindsym $mod+$alt+9 move container to workspace number 9, workspace number 9
-	bindsym $mod+$alt+0 move container to workspace number 10, workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+    # Workspaces:
+    #
+        # Switch to workspace
+        bindsym $mod+1 workspace number 1
+        bindsym $mod+2 workspace number 2
+        bindsym $mod+3 workspace number 3
+        bindsym $mod+4 workspace number 4
+        bindsym $mod+5 workspace number 5
+        bindsym $mod+6 workspace number 6
+        bindsym $mod+7 workspace number 7
+        bindsym $mod+8 workspace number 8
+        bindsym $mod+9 workspace number 9
+        bindsym $mod+0 workspace number 10
+        # Move focused container to workspace
+        bindsym $mod+Shift+1 move container to workspace number 1
+        bindsym $mod+Shift+2 move container to workspace number 2
+        bindsym $mod+Shift+3 move container to workspace number 3
+        bindsym $mod+Shift+4 move container to workspace number 4
+        bindsym $mod+Shift+5 move container to workspace number 5
+        bindsym $mod+Shift+6 move container to workspace number 6
+        bindsym $mod+Shift+7 move container to workspace number 7
+        bindsym $mod+Shift+8 move container to workspace number 8
+        bindsym $mod+Shift+9 move container to workspace number 9
+        bindsym $mod+Shift+0 move container to workspace number 10
+
+        bindsym $mod+$alt+1 move container to workspace number 1, workspace number 1 
+        bindsym $mod+$alt+2 move container to workspace number 2, workspace number 2
+        bindsym $mod+$alt+3 move container to workspace number 3, workspace number 3
+        bindsym $mod+$alt+4 move container to workspace number 4, workspace number 4
+        bindsym $mod+$alt+5 move container to workspace number 5, workspace number 5
+        bindsym $mod+$alt+6 move container to workspace number 6, workspace number 6
+        bindsym $mod+$alt+7 move container to workspace number 7, workspace number 7
+        bindsym $mod+$alt+8 move container to workspace number 8, workspace number 8
+        bindsym $mod+$alt+9 move container to workspace number 9, workspace number 9
+        bindsym $mod+$alt+0 move container to workspace number 10, workspace number 10
+        # Note: workspaces can have any name you want, not just numbers.
+        # We just use 1-10 as the default.
 	
+# Window Rules
 	for_window [class="Spotify"] move container to workspace 5
 	for_window [class="discord"] move container to workspace 6
 	for_window [class="zoom"]    move container to workspace 6
@@ -164,6 +165,7 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
     for_window [app_id="lutris"] move container to workspace 8
 	for_window [app_id="xfce-polkit"] floating enable
     for_window [app_id="Save File"] floating enable
+    for_window [app_id="pavucontrol"] floating enable
 	
 #
 # Layout stuff:
@@ -271,25 +273,31 @@ font pango:Inter 11
 default_border pixel 3
 default_floating_border pixel 3 
 floating_maximum_size -1 x -1
-gaps inner 5
-gaps outer 2 
+smart_gaps on
+smart_borders on
+gaps inner 3
+gaps outer 3 
+
+title_align center
+titlebar_padding 3
 
 popup_during_fullscreen smart 
 
-set $wm_color_border_active_bg       #3b84c0
-set $wm_color_border_active_fg       #353b45
-set $wm_color_border_inactive_bg     #353b45
-set $wm_color_border_inactive_fg     #e6efff
-set $wm_color_background             #2E3440
+set $border_active_bg       #3b84c0
+set $border_active_fg       #e6efff
+set $border_inactive_bg     #353b45
+set $border_inactive_fg     #e6efff
+set $border_unfocused_bg    #5e81ac
+set $background             #2E3440
 
 # Window Border color
-# class                 border                       background                   text                         indicator                    child_border
-client.focused          $wm_color_border_active_bg   $wm_color_border_active_bg   $wm_color_border_active_fg   $wm_color_border_active_bg   $wm_color_border_active_bg
-client.focused_inactive $wm_color_border_inactive_bg $wm_color_border_active_bg   $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
-client.unfocused        $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
-client.urgent           $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
-client.placeholder      $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
-client.background       $wm_color_background
+# class                 border              background           text                indicator           child_border
+client.focused          $border_active_bg   $border_active_bg    $border_active_fg   $border_active_bg   $border_active_bg
+client.focused_inactive $border_inactive_bg $border_unfocused_bg $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.unfocused        $border_inactive_bg $border_inactive_bg $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.urgent           $border_inactive_bg $border_inactive_bg  $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.placeholder      $border_inactive_bg $border_inactive_bg  $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.background       $background
 
 # Do on Startup
 #
@@ -305,6 +313,7 @@ exec_always {
 }
 
 exec --no-startup-id light -N 20
-exec_always --no-startup-id /usr/libexec/xfce-polkit
+exec --no-startup-id /usr/libexec/xfce-polkit
+exec powerprofilesctl set power-saver
 
 include /etc/sway/config.d/*

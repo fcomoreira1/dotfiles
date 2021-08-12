@@ -1,7 +1,7 @@
 // -*- mode: json -*-
 {
 	"layer": "bottom",
-	"position": "top",
+	"position": "bottom",
 
 	"modules-left": [
 		"sway/workspaces",
@@ -15,6 +15,7 @@
         "custom/spotify",
 		"pulseaudio",
         "backlight",
+        "network",
 		"battery",
 		"clock",
 		"tray",
@@ -36,6 +37,11 @@
         "exec": "/home/fcomoreira/.config/waybar/mediaplayer.py", 
         "exec-if": "pgrep spotify"
     }, 
+    "network": {
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "⚠ Disconnected",
+    },
 
     "backlight": {
         "device": "intel_backlight",
@@ -58,9 +64,8 @@
 				""
 			]
 		},
-		"scroll-step": 5,
-		"on-click": "pamixer -t",
-		"on-click-right": "pavucontrol"
+		"scroll-step": 1,
+		"on-click": "pavucontrol"
 	},
 	"battery": {
 		"states": {

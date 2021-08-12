@@ -80,6 +80,9 @@ window#waybar {
 #backlight{
     color: @red;
 }
+#network{
+    color:@blue;
+}
 
 #battery {
     color: @green;
