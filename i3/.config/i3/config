@@ -86,10 +86,7 @@ bindsym $mod+Return exec --no-startup-id  alacritty -e fish
 bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
 bindsym $mod+i exec brave-browser 
 bindsym $mod+Shift+i exec brave-browser --incognito
-bindsym $mod+d exec dash /home/fcomoreira/scripts/menu.sh -run
-bindsym $mod+w exec dash /home/fcomoreira/scripts/menu.sh -window
-bindsym $mod+Shift+w exec bash ~/scripts/wifirofi.sh
-bindsym $mod+Shift+p exec --no-startup-id ~/.config/polybar/launch.sh
+bindsym $mod+d exec dmenu_run 
 bindsym $mod+n exec nautilus 
 
 ###############################################################
@@ -150,10 +147,8 @@ bindsym $mod+r mode "Resize Mode"
 # External programs on startup
 ###############################################################
 
-exec --no-startup-id picom -b
-exec --no-startup-id light -N 30
+exec --no-startup-id light -N 20
 exec --no-startup-id dunst &
-exec --no-startup-id unclutter --ignore-scrolling -b
 exec_always --no-startup-id /usr/libexec/xfce-polkit
 
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -183,8 +178,8 @@ client.background       $wm_color_background
 font pango:JetBrains Medium 12
 default_border pixel 3
 default_floating_border pixel 3 
-gaps inner 7
-gaps outer 3 
+#gaps inner 7
+#gaps outer 3 
 
 popup_during_fullscreen smart 
 focus_follows_mouse yes 
