@@ -1,0 +1,47 @@
+@define-color background #1e222a;
+@define-color background-alt  #282c34;
+@define-color foreground  #abb2bf;
+@define-color foreground-bright  #e6efff;
+@define-color blue  #5e81ac;
+@define-color cyan  #56b6c2;
+@define-color red  #e06c75;
+@define-color yellow  #e5c07b;
+@define-color magenta  #c678dd;
+@define-color orange  #d19a66;
+@define-color gray  #353b45;
+@define-color green  #98c379;
+
+window {
+    margin: 5px;
+    background-color: @background;
+    font-family: Inter Medium;
+    border-radius: 5px;
+}
+
+#input {
+    margin: 5px;
+    background-color: @background-alt;
+}
+
+#inner-box {
+    margin: 5px;
+}
+
+#outer-box {
+    margin: 5px;
+}
+
+#scroll {
+    margin: 5px;
+}
+
+#text {
+    margin: 5px;
+}
+ #entry:selected{
+    border-radius: 5px;
+    background-color: @cyan;
+}
+#text:selected{
+    color: @gray
+}
