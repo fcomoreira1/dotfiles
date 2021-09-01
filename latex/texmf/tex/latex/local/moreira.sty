@@ -1,5 +1,6 @@
 \ProvidesPackage{moreira}
 
+% Declaring IFS
 \newif\ifmoreirasexythm\moreirasexythmfalse
 \newif\ifmoreirasexyprob\moreirasexyprobfalse
 \newif\ifmoreirathmsty\moreirathmstyfalse
@@ -13,6 +14,7 @@
 \newif\ifmoreiraheader\moreiraheadertrue
 \newif\ifmoreiratitle\moreiratitletrue
 
+% Declaring Options
 
 \DeclareOption{sexy}{\moreirasexythmtrue \moreirasexyprobtrue \moreirathmstytrue}
 \DeclareOption{sexythm}{\moreirasexythmtrue \moreirathmstytrue}
@@ -25,6 +27,7 @@
 \DeclareOption{portuguese}{\moreiraPttrue \moreiraEngfalse}
 \ProcessOptions\relax
 
+%Includes
 \usepackage{hyperref}
 \usepackage{bbm}
 \usepackage{amsmath,amssymb}
@@ -33,6 +36,8 @@
 \usepackage[a4paper, total={6.5in, 9in}]{geometry}
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
+
+\setlength{\parindent}{0em}
 
 % Hyperref
 \definecolor{linkBlue}{HTML}{1A0DAB}
@@ -45,6 +50,7 @@
      urlcolor=linkBlue,
 }
 \urlstyle{sf}
+
 % Math Symbols
 
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
@@ -64,6 +70,7 @@
 %Black square at the end of a proof
 \renewcommand\qedsymbol{$\blacksquare$}
 
+% Creating mdframed boxes
 
 \ifmoreirathmsty
 	\definecolor{Teal}{HTML}{30D5C8}
