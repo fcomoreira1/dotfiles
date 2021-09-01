@@ -38,11 +38,12 @@ output * bg /home/fcomoreira/pictures/Wallpapers/estrelacadente.jpg stretch
 #
 # Example configuration:
 #
-exec swayidle -w \
-         timeout 300 'swaylock -f -s=stretch -i /home/fcomoreira/pictures/Wallpapers/the-northern-forest-3840×2160.jpg' \
-         timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'\
-		 timeout 600 'systemctl suspend'\
-		 resume 'swaymsg "output \* dpms on"'
+set $lock_bg /home/fcomoreira/pictures/Wallpapers/the-northern-forest-3840×2160.jpg
+exec swayidle \
+         timeout 360 'swaylock -f -s stretch -i $lock_bg' \
+		 timeout 660 'systemctl suspend'\
+         before-sleep 'playerctl -a pause' \
+         before-sleep 'swaylock -f -s stretch -i $lock_bg'
 
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
@@ -166,6 +167,7 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 	for_window [app_id="xfce-polkit"] floating enable
     for_window [app_id="Save File"] floating enable
     for_window [app_id="pavucontrol"] floating enable
+    for_window [title="Firefox - Sharing Indicator"] floating enable
 	
 #
 # Layout stuff:
@@ -281,6 +283,9 @@ gaps outer 3
 title_align center
 titlebar_padding 3
 
+focus_follows_mouse always
+mouse_warping container
+
 popup_during_fullscreen smart 
 
 set $border_active_bg       #3b84c0
@@ -312,7 +317,7 @@ exec_always {
     gsettings set org.gnome.desktop.default-applications.terminal exec-arg -e
 }
 
-exec --no-startup-id light -N 20
+exec --no-startup-id light -N 10
 exec --no-startup-id /usr/libexec/xfce-polkit
 exec powerprofilesctl set power-saver
 
