@@ -5,6 +5,7 @@ let g:vimwiki_list = [{'path': '~/wiki', 'syntax': 'markdown',
 			\'auto_diary_index': 1}]
 "let g:vimwiki_folding = 'expr'
 let g:vimwiki_markdown_link_ext = 1
+let g:vimwiki_table_mappings = 0
 
 function! Math()
     "" Define certain regions
