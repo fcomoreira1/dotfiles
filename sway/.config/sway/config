@@ -26,7 +26,7 @@ set $menu ~/scripts/menu.sh
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/fcomoreira/pictures/Wallpapers/estrelacadente.jpg stretch 
+output * bg /home/fcomoreira/pictures/Wallpapers/wallhaven-rddgwm_1920x1080.png stretch 
 #
 # Example configuration:
 #
@@ -40,8 +40,7 @@ output * bg /home/fcomoreira/pictures/Wallpapers/estrelacadente.jpg stretch
 #
 set $lock_bg /home/fcomoreira/pictures/Wallpapers/the-northern-forest-3840×2160.jpg
 exec swayidle \
-         timeout 360 'swaylock -f -s stretch -i $lock_bg' \
-		 timeout 660 'systemctl suspend'\
+		 timeout 720 'systemctl suspend'\
          before-sleep 'playerctl -a pause' \
          before-sleep 'swaylock -f -s stretch -i $lock_bg'
 

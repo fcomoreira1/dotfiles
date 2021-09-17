@@ -88,8 +88,8 @@
 	}
 	\mdfdefinestyle{mdblackborderbox}{
 		linewidth=0.5pt,
-		skipabove=4pt,
-		skipbelow=2pt,
+		skipabove=9pt,
+		skipbelow=5pt,
 		frametitlefont=\bfseries,
 		innertopmargin=4pt,
 		innerbottommargin=8pt,
@@ -106,6 +106,16 @@
 		bottomline=false,
 		linecolor=Teal,
 		backgroundcolor=Teal!7,
+	}
+    \mdfdefinestyle{mdredsidebar}{%
+		skipabove=8pt,
+		linewidth=2pt,
+		rightline=false,
+		leftline=true,
+		topline=false,
+		bottomline=false,
+		linecolor=red!50,
+		backgroundcolor=red!5,
 	}
 
 	\mdfdefinestyle{mdbluebox}{%
@@ -164,8 +174,8 @@
 	]{proofbox}
 	\declaretheoremstyle[
 		headfont=\sffamily\bfseries\color{black},
-		mdframed={style=mdredbox},
-	]{redbox}
+		mdframed={style=mdredsidebar},
+	]{redsidebar}
 	\declaretheoremstyle[
 		headfont=\sffamily\bfseries,
 		postheadspace=0.1cm,
@@ -178,11 +188,12 @@
 	\providecommand{\styleThm}{thmbox}
 	\providecommand{\styleLemma}{lemmabox}
 	\providecommand{\styleCorollary}{tealbox}
+    \providecommand{\styleRemark}{basic}
 	\providecommand{\styleConjecture}{tealbox}
-	\providecommand{\styleEx}{redbox}
-	\providecommand{\styleObs}{redbox}
+	\providecommand{\styleEx}{redsidebar}
+	\providecommand{\styleObs}{redsidebar}
 	\providecommand{\styleProp}{blackborderbox}
-	\providecommand{\styleDef}{blackborderbox}
+	\providecommand{\styleDef}{tealbox}
 	\providecommand{\styleClaim}{blackborderbox}
 \else
 	\declaretheoremstyle[
@@ -236,6 +247,8 @@
 	\providecommand{\nameLemma}{Lemma}
 	\providecommand{\nameCorollary}{Corollary}
 	\providecommand{\nameProposition}{Proposition}
+    \providecommand{\nameRemark}{Remark}
+    \providecommand{\nameProperty}{Property}
 	\providecommand{\nameFact}{Fact}
 	\providecommand{\nameExample}{Example}
 	\providecommand{\nameDefinition}{Definition}
@@ -252,6 +265,7 @@
 	\providecommand{\nameLemma}{Lema}
 	\providecommand{\nameCorollary}{Corolário}
 	\providecommand{\nameProposition}{Proposição}
+    \providecommand{\nameProperty}{Propriedade}
 	\providecommand{\nameFact}{Fato}
 	\providecommand{\nameExample}{Exemplo}
 	\providecommand{\nameDefinition}{Definição}
@@ -270,9 +284,10 @@
 \declaretheorem[style=\styleCorollary,name=\nameCorollary,sibling=theorem]{corollary}
 \declaretheorem[style=\styleProp,name=\nameProposition,sibling=theorem]{proposition}
 \declaretheorem[style=\styleProp,name=\nameProposition,numbered=no]{proposition*}
+\declaretheorem[style=\styleProp,name=\nameRemark,sibling=theorem]{remark}
 \declaretheorem[style=\styleFact,name=\nameFact,sibling=theorem]{fact}
 
-\declaretheorem[style=\styleEx,name=\nameExample]{example}
+\declaretheorem[style=\styleEx,name=\nameExample,sibling=theorem]{example}
 \declaretheorem[style=\styleDef,name=\nameDefinition]{definition}
 
 \declaretheorem[style=\styleEx,name=\nameExample,numbered=no]{example*}
@@ -363,37 +378,3 @@
 		\bigskip
 	}
 \fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
