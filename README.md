@@ -11,10 +11,10 @@ The colorscheme of almost all these dotfiles is
 inspired by atom's onedark.
 
 ## Info
-* Fedora is the daily desktop distro I use
+* Fedora is the Linux distro I use
 * Sway is the compositor
 	* I use waybar as the status bar for sway
-* Neovim is the text editor
+* Vim (Neovim) is the text editor
 	* vim-plug is the nvim package manager
 * fish as interactive shell
 * Zathura as the pdf viewer

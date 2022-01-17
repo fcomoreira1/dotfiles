@@ -21,7 +21,7 @@
 
 window#waybar {
     background: @background;
-    color: white;
+    color: @foreground;
 }
 
 #workspaces {
@@ -38,7 +38,7 @@ window#waybar {
 
 #workspaces button.focused {
     color: @background;
-    background-color: @cyan;
+    background-color: @foreground;
     border-radius: 5px;
 }
 
@@ -74,38 +74,30 @@ window#waybar {
 	margin-right: 7px;
 }
 #backlight{
-    color: @red;
 }
 #network{
-    color:@blue;
 }
 
 #battery {
-    color: @green;
     border-radius: 0px 5px 5px 0px;
     margin-right: 15px;
 }
 
 #battery.charging {
-    color: @green;
 }
 
 #battery.warning:not(.charging){
-	color: @orange;
 }
 
 #battery.critical:not(.charging) {
     background-color: @red;
-    color: @foreground-bright;
 }
 
 #pulseaudio {
-	color: @yellow;
 	border-radius: 5px 0px 0px 5px;
 }
 
 #custom-spotify{
-    color: @cyan;
     background-color: @gray;
     border-radius: 5px;
     padding: 0 10px;
@@ -114,7 +106,6 @@ window#waybar {
 }
 
 #clock {
-    color: @magenta;
     border-radius: 5px 5px 5px 5px;
     margin-right: 50px;
 }

@@ -8,5 +8,5 @@ require'bufferline'.setup{
 }
 vim.api.nvim_set_keymap('n', 'b[', ':BufferLineCycleNext<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', 'b]', ':BufferLineCyclePrev<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>b', ':Buffers<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>b', ':Buffers<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', 'gb', ':BufferLinePick<CR>', {noremap = true})

@@ -13,11 +13,13 @@
 \newif\ifmoreirasection\moreirasectionfalse
 \newif\ifmoreiraheader\moreiraheadertrue
 \newif\ifmoreiratitle\moreiratitletrue
+\newif\ifmoreirablacksquare\moreirablacksquarefalse
 
 % Declaring Options
 
 \DeclareOption{sexy}{\moreirasexythmtrue \moreirasexyprobtrue \moreirathmstytrue}
 \DeclareOption{sexythm}{\moreirasexythmtrue \moreirathmstytrue}
+\DeclareOption{blacksquare}{\moreirablacksquaretrue}
 \DeclareOption{sexyprob}{\moreirasexyprobtrue \moreirathmstytrue}
 \DeclareOption{font}{\moreirafonttrue}
 \DeclareOption{section}{\moreirasectiontrue}
@@ -33,7 +35,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm}
 \usepackage{xcolor}
-\usepackage[a4paper, total={6.5in, 9in}]{geometry}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
 
@@ -68,7 +70,12 @@
 
 
 %Black square at the end of a proof
-\renewcommand\qedsymbol{$\blacksquare$}
+\ifmoreirablacksquare
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \newcommand{\myblacksquare}{\blacksquare}
+\else
+    \newcommand{\myblacksquare}{}
+\fi
 
 % Creating mdframed boxes
 
@@ -141,7 +148,6 @@
 		bottomline=false,
 		skipbelow=2pt,
 		linecolor=black!40,
-		nobreak=true,
 		backgroundcolor=black!2,
 	}
 
@@ -167,10 +173,14 @@
 		headfont=\sffamily\bfseries,
 		mdframed={style=mdbluebox},
 	]{lemmabox}
+    \declaretheoremstyle[
+		headfont=\sffamily\bfseries,
+		mdframed={style=mdbluebox},
+	]{propbox}
 	\declaretheoremstyle[
 		headfont=\sffamily\bfseries,
 		mdframed={style=mdproof},
-		qed=$\blacksquare$
+		qed=$\myblacksquare$
 	]{proofbox}
 	\declaretheoremstyle[
 		headfont=\sffamily\bfseries\color{black},
@@ -192,7 +202,8 @@
 	\providecommand{\styleConjecture}{tealbox}
 	\providecommand{\styleEx}{redsidebar}
 	\providecommand{\styleObs}{redsidebar}
-	\providecommand{\styleProp}{blackborderbox}
+	\providecommand{\styleProp}{propbox}
+    \providecommand{\styleRemark}{blackborderbox}
 	\providecommand{\styleDef}{tealbox}
 	\providecommand{\styleClaim}{blackborderbox}
 \else
@@ -212,6 +223,7 @@
 	\providecommand{\styleEx}{basic}
 	\providecommand{\styleObs}{basic}
 	\providecommand{\styleProp}{basic}
+    \providecommand{\styleRemark}{basic}
 	\providecommand{\styleDef}{basic}
 	\providecommand{\styleClaim}{basic}
 \fi
@@ -256,6 +268,7 @@
 	\providecommand{\nameConjecture}{Conjecture}
 	\providecommand{\nameClaim}{Claim}
 	\providecommand{\nameQuestion}{Question}
+	\providecommand{\nameExercise}{Exercise}
 	\providecommand{\nameProblem}{Problem}
 \fi
 \ifmoreiraPt
@@ -265,6 +278,7 @@
 	\providecommand{\nameLemma}{Lema}
 	\providecommand{\nameCorollary}{Corolário}
 	\providecommand{\nameProposition}{Proposição}
+    \providecommand{\nameRemark}{Remark}
     \providecommand{\nameProperty}{Propriedade}
 	\providecommand{\nameFact}{Fato}
 	\providecommand{\nameExample}{Exemplo}
@@ -272,19 +286,21 @@
 	\providecommand{\nameObs}{Obs}
 	\providecommand{\nameConjecture}{Conjectura}
 	\providecommand{\nameClaim}{Afirmação}
-	\providecommand{\nameQuestion}{Questão}
+	\providecommand{\nameExercise}{Exercício}
 	\providecommand{\nameProblem}{Problema}
 \fi
 
 \declaretheorem[style=\styleProof,name=\nameProof,numbered=no]{proof}
 \declaretheorem[style=\styleProof,name=\nameSketch,numbered=no]{sketch}
 \declaretheorem[style=\styleThm,name=\nameTheorem,parent=section]{theorem}
+\declaretheorem[style=\styleThm,name=\nameTheorem,numbered=no]{theorem*}
 \declaretheorem[style=\styleLemma,name=\nameLemma,sibling=theorem]{lemma}
 \declaretheorem[style=\styleLemma,name=\nameLemma,numbered=no]{lemma*}
 \declaretheorem[style=\styleCorollary,name=\nameCorollary,sibling=theorem]{corollary}
 \declaretheorem[style=\styleProp,name=\nameProposition,sibling=theorem]{proposition}
 \declaretheorem[style=\styleProp,name=\nameProposition,numbered=no]{proposition*}
-\declaretheorem[style=\styleProp,name=\nameRemark,sibling=theorem]{remark}
+\declaretheorem[style=\styleRemark,name=\nameRemark,sibling=theorem]{remark}
+\declaretheorem[style=\styleRemark,name=\nameRemark,numbered=no]{remark*}
 \declaretheorem[style=\styleFact,name=\nameFact,sibling=theorem]{fact}
 
 \declaretheorem[style=\styleEx,name=\nameExample,sibling=theorem]{example}
@@ -298,6 +314,7 @@
 \declaretheorem[style=\styleDef,name=\nameClaim,numbered=no]{claim}
 
 \declaretheorem[style=\styleProb,name=\nameQuestion]{question}
+\declaretheorem[style=\styleProb,name=\nameExercise,sibling=question]{exercise}
 \declaretheorem[style=\styleProb,name=\nameProblem,sibling=question]{problem}
 \declaretheorem[style=\styleProb,name=\nameProblem,numbered=no]{problem*}
 \declaretheorem[style=\styleProb,name=\nameQuestion,numbered=no]{question*}

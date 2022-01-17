@@ -1,18 +1,15 @@
 "Vim-Plug
 call plug#begin()
 
-Plug 'lervag/vimtex'
-Plug 'SirVer/ultisnips'
-
 Plug 'vimwiki/vimwiki'
 " Plug 'tools-life/taskwiki'
 
-Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'mhinz/vim-startify'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'vim-airline/vim-airline'
 Plug 'akinsho/nvim-bufferline.lua'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 Plug 'kyazdani42/nvim-web-devicons' 
 Plug 'norcalli/nvim-colorizer.lua'
@@ -20,78 +17,41 @@ Plug 'b3nj5m1n/kommentary'
 Plug 'kdheepak/lazygit.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/playground'
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-omni'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'lervag/vimtex'
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'kabouzeid/nvim-lspinstall'
 
+Plug 'Vimjas/vim-python-pep8-indent'
+
 call plug#end()
+
+lua <<EOF
+require "options"
+require "keymaps"
+EOF
 
 set termguicolors
 colorscheme onedark
 let g:onedark_termcolors=256
 let g:onedark_terminal_italics = 2
-
-let mapleader = " "
-
-nnoremap <silent>Q :noh<CR>
-nnoremap <silent><S-Up> :resize +2<CR> 
-nnoremap <silent><S-Down> :resize -2<CR>
-nnoremap <silent><S-Left> :vertical resize +2<CR>
-nnoremap <silent><S-Right> :vertical resize -2<CR>
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
-nnoremap ; :
-nnoremap : ;
-nnoremap <Tab> >>_
-nnoremap <S-Tab> <<_
-vnoremap > >gv
-vnoremap < <gv
-nnoremap <C-f> :NvimTreeToggle<CR>
-nnoremap <C-t> :terminal<CR>
-nnoremap <C-s> :Startify<CR>
-nnoremap <C-b> <C-v>
-vnoremap <C-c> "+y
-inoremap <C-v> "+p
-noremap <C-v> "+p
-
-" Keep it centered
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-" Undo breakpoints
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-inoremap ! !<c-g>u
-inoremap ? ?<c-g>u
-
-" Moving Text
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-nnoremap <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
-
-tnoremap <leader>h <C-\><C-n><C-w>h
-tnoremap <leader>j <C-\><C-n><C-w>j
-tnoremap <leader>k <C-\><C-n><C-w>k
-tnoremap <leader>l <C-\><C-n><C-w>l
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
+set lazyredraw
 
 "Syntax highlighting
 autocmd BufNewFile,BufRead *.rasi setf css
 autocmd BufNewFile,BufRead *.conf setf conf
 autocmd BufNewFile,BufRead config setf cfg
-
-"" Airline
-let g:airline_powerline_fonts = 1 
-let g:airline_section_z = '☰ %3l/%L:%2v'
 
 "Startify
 let g:startify_session_dir='~/.config/nvim/session'

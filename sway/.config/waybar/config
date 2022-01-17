@@ -1,7 +1,7 @@
 // -*- mode: json -*-
 {
 	"layer": "bottom",
-	"position": "bottom",
+	"position": "top",
 
 	"modules-left": [
 		"sway/workspaces",

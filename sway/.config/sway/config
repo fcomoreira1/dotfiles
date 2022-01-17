@@ -17,7 +17,9 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 # set $browser brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland 
-set $browser brave-browser
+# set $browser-icognito $browser --incognito
+set $browser firefox
+set $browser-icognito firefox -private-window
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -38,11 +40,11 @@ output * bg /home/fcomoreira/pictures/Wallpapers/wallhaven-rddgwm_1920x1080.png 
 #
 # Example configuration:
 #
-set $lock_bg /home/fcomoreira/pictures/Wallpapers/the-northern-forest-3840×2160.jpg
+set $lock_bg /home/fcomoreira/pictures/Wallpapers/IMG_5458.JPG
 exec swayidle \
 		 timeout 720 'systemctl suspend'\
-         before-sleep 'playerctl -a pause' \
-         before-sleep 'swaylock -f -s stretch -i $lock_bg'
+         before-sleep 'playerctl -a pause && swaylock -f -s stretch -i $lock_bg'\
+         lock 'playerctl -a pause && swaylock -f -c 101010'
 
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
@@ -82,20 +84,12 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 
 	bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
 	bindsym $mod+i exec $browser 
-	bindsym $mod+Shift+i exec $browser --incognito
+	bindsym $mod+Shift+i exec $browser-icognito 
 	bindsym $mod+n exec nautilus 
 	bindsym $mod+Escape exec $menu -power 
+
     floating_modifier $mod normal
 
-	bindsym Print exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh -s
-	bindcode 642   exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh 
-
-	bindsym XF86AudioRaiseVolume exec /home/fcomoreira/scripts/volume.sh -i 
-	bindsym XF86AudioLowerVolume exec /home/fcomoreira/scripts/volume.sh -d
-	bindsym XF86AudioMute exec /home/fcomoreira/scripts/volume.sh -m
-    bindsym XF86AudioMicMute exec /home/fcomoreira/scripts/volume.sh -mic
-	bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 
-	bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
     bindsym $mod+Shift+c reload
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -119,43 +113,43 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
         bindsym $mod+Shift+$up move up
         bindsym $mod+Shift+$right move right
 
-    # Workspaces:
+# Workspaces:
     #
-        # Switch to workspace
-        bindsym $mod+1 workspace number 1
-        bindsym $mod+2 workspace number 2
-        bindsym $mod+3 workspace number 3
-        bindsym $mod+4 workspace number 4
-        bindsym $mod+5 workspace number 5
-        bindsym $mod+6 workspace number 6
-        bindsym $mod+7 workspace number 7
-        bindsym $mod+8 workspace number 8
-        bindsym $mod+9 workspace number 9
-        bindsym $mod+0 workspace number 10
-        # Move focused container to workspace
-        bindsym $mod+Shift+1 move container to workspace number 1
-        bindsym $mod+Shift+2 move container to workspace number 2
-        bindsym $mod+Shift+3 move container to workspace number 3
-        bindsym $mod+Shift+4 move container to workspace number 4
-        bindsym $mod+Shift+5 move container to workspace number 5
-        bindsym $mod+Shift+6 move container to workspace number 6
-        bindsym $mod+Shift+7 move container to workspace number 7
-        bindsym $mod+Shift+8 move container to workspace number 8
-        bindsym $mod+Shift+9 move container to workspace number 9
-        bindsym $mod+Shift+0 move container to workspace number 10
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
 
-        bindsym $mod+$alt+1 move container to workspace number 1, workspace number 1 
-        bindsym $mod+$alt+2 move container to workspace number 2, workspace number 2
-        bindsym $mod+$alt+3 move container to workspace number 3, workspace number 3
-        bindsym $mod+$alt+4 move container to workspace number 4, workspace number 4
-        bindsym $mod+$alt+5 move container to workspace number 5, workspace number 5
-        bindsym $mod+$alt+6 move container to workspace number 6, workspace number 6
-        bindsym $mod+$alt+7 move container to workspace number 7, workspace number 7
-        bindsym $mod+$alt+8 move container to workspace number 8, workspace number 8
-        bindsym $mod+$alt+9 move container to workspace number 9, workspace number 9
-        bindsym $mod+$alt+0 move container to workspace number 10, workspace number 10
-        # Note: workspaces can have any name you want, not just numbers.
-        # We just use 1-10 as the default.
+    bindsym $mod+$alt+1 move container to workspace number 1, workspace number 1 
+    bindsym $mod+$alt+2 move container to workspace number 2, workspace number 2
+    bindsym $mod+$alt+3 move container to workspace number 3, workspace number 3
+    bindsym $mod+$alt+4 move container to workspace number 4, workspace number 4
+    bindsym $mod+$alt+5 move container to workspace number 5, workspace number 5
+    bindsym $mod+$alt+6 move container to workspace number 6, workspace number 6
+    bindsym $mod+$alt+7 move container to workspace number 7, workspace number 7
+    bindsym $mod+$alt+8 move container to workspace number 8, workspace number 8
+    bindsym $mod+$alt+9 move container to workspace number 9, workspace number 9
+    bindsym $mod+$alt+0 move container to workspace number 10, workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
 	
 # Window Rules
 	for_window [class="Spotify"] move container to workspace 5
@@ -242,9 +236,29 @@ mode "Media" {
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
-
 }
 bindsym $mod+m mode "Media"
+
+mode "Courses" {
+    bindsym a exec ~/scripts/courses.py -add
+    bindsym t exec ~/scripts/courses.py -hmw
+    bindsym x exec ~/scripts/courses.py -books
+
+    bindsym Escape mode "default"
+}
+bindsym $mod+x mode "Courses"
+
+# Media Keys
+
+bindsym Print exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh -s
+bindcode 642   exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh 
+bindsym XF86AudioRaiseVolume exec /home/fcomoreira/scripts/volume.sh -i 
+bindsym XF86AudioLowerVolume exec /home/fcomoreira/scripts/volume.sh -d
+bindsym XF86AudioMute exec /home/fcomoreira/scripts/volume.sh -m
+bindsym XF86AudioMicMute exec /home/fcomoreira/scripts/volume.sh -mic
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+
 #
 # Status Bar:
 #
