@@ -8,7 +8,9 @@ local config = {
       active = signs,
     },
     update_in_insert = true,
-    underline = true,
+    underline = {
+        severity = {min=vim.diagnostic.severity.WARN}
+    },
     severity_sort = true,
     float = {
       focusable = false,
@@ -43,7 +45,8 @@ local on_attach = function(client, bufnr)
     local keymap = vim.api.nvim_set_keymap
     keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
     keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    keymap("n", "<space>s", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+    keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    keymap("n", "gL", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
@@ -84,6 +87,8 @@ lspconfig.tsserver.setup{
     capabilities = capabilities,
 }
 vim.cmd 'autocmd BufWritePre *.cpp lua vim.lsp.buf.formatting_sync(nil, 100)'
+vim.cmd 'autocmd BufWritePre *.js* lua vim.lsp.buf.formatting_sync(nil, 100)'
+vim.cmd 'autocmd BufWritePre *.ts* lua vim.lsp.buf.formatting_sync(nil, 100)'
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.cssls.setup { 
@@ -94,12 +99,3 @@ lspconfig.html.setup {
     on_attach = on_attach,
     capabilities = capabilities, 
 }
-
--- Auxiliary plugins
-
-require('lsp_signature').setup({
-    max_height = 4,
-    max_width = 119,
-    toggle_key = "<c-x>",
-    transparency = 29
-})

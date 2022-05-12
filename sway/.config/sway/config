@@ -1,207 +1,124 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-### Variables
-#
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
 set $alt Mod1
-# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
 set $term alacritty
 # set $browser brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland 
 # set $browser-icognito $browser --incognito
-set $browser firefox
-set $browser-icognito firefox -private-window
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
+set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland 
+set $browser-icognito $browser --incognito
+# set $browser firefox
+# set $browser-icognito firefox -private-window
 set $menu ~/scripts/menu.sh
+set $lock_bg /home/fcomoreira/pictures/Wallpapers/IMG_5458.JPG
+set $wallpaper1 /home/fcomoreira/pictures/Wallpapers/max-suleimanov-dv-132.jpg
+set $wallpaper2 /home/fcomoreira/pictures/Wallpapers/max-suleimanov-dv-132.jpg
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/fcomoreira/pictures/Wallpapers/wallhaven-rddgwm_1920x1080.png stretch 
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+# output * bg /home/fcomoreira/pictures/Wallpapers/wallhaven-rddgwm_1920x1080.png stretch 
+output eDP-1 bg $wallpaper1 stretch
+output HDMI-A-1 bg $wallpaper2 stretch
 
-### Idle configuration
-#
-# Example configuration:
-#
-set $lock_bg /home/fcomoreira/pictures/Wallpapers/IMG_5458.JPG
+output eDP-1 pos 0 0
+output HDMI-A-1 subpixel rgb \
+        res 1920x1080@74.906Hz \
+        position 1920 0 \
+        adaptive_sync on
+
 exec swayidle \
 		 timeout 720 'systemctl suspend'\
          before-sleep 'playerctl -a pause && swaylock -f -s stretch -i $lock_bg'\
          lock 'playerctl -a pause && swaylock -f -c 101010'
 
+
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
 
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+input "1267:12679:ELAN0672:00_04F3:3187_Touchpad" {
+   dwt enabled
+   tap enabled
+   natural_scroll enabled
+   middle_emulation enabled
+}
 
-### Input configuration
-#
-# Example configuration:
-#
-   input "1267:12679:ELAN0672:00_04F3:3187_Touchpad" {
-       dwt enabled
-       tap enabled
-       # natural_scroll enabled
-       middle_emulation enabled
-   }
+input "type:keyboard" {
+    xkb_layout us,br
+    xkb_options grp:shift_toggle
+}
 
-   input "type:keyboard" {
-		xkb_layout us,br
-		xkb_options grp:shift_toggle
-	}
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+bindsym $mod+Return exec $term -e fish
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu -run
+bindsym $mod+w exec $menu -window
+bindsym $mod+Shift+w exec /home/fcomoreira/scripts/wifimenu.sh
 
-### Key bindings
-#
-# Basics Program Lauching:
-#
-    bindsym $mod+Return exec $term -e fish
-    bindsym $mod+Shift+q kill
-    bindsym $mod+d exec $menu -run
-    bindsym $mod+w exec $menu -window
-    bindsym $mod+Shift+w exec /home/fcomoreira/scripts/wifimenu.sh
+bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
+bindsym $mod+i exec $browser 
+bindsym $mod+Shift+i exec $browser-icognito 
+bindsym $mod+n exec nautilus 
+bindsym $mod+Escape exec $menu -power 
 
-	bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
-	bindsym $mod+i exec $browser 
-	bindsym $mod+Shift+i exec $browser-icognito 
-	bindsym $mod+n exec nautilus 
-	bindsym $mod+Escape exec $menu -power 
-
-    floating_modifier $mod normal
+floating_modifier $mod normal
 
 
-    bindsym $mod+Shift+c reload
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-    # Dunst:
-	    bindsym $alt+space exec dunstctl close
-        bindsym $alt+grave exec dunstctl history-pop
-        bindsym $alt+p exec dunstctl toggle
+# Dunst:
+bindsym $alt+space exec dunstctl close
+bindsym $alt+grave exec dunstctl history-pop
+bindsym $alt+p exec dunstctl toggle
 
-    # Moving around:
+# Moving around:
 
-        # Move your focus around
-        bindsym $mod+$left focus left
-        bindsym $mod+$down focus down
-        bindsym $mod+$up focus up
-        bindsym $mod+$right focus right
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
-        # Move the focused window with the same, but add Shift
-        bindsym $mod+Shift+$left move left
-        bindsym $mod+Shift+$down move down
-        bindsym $mod+Shift+$up move up
-        bindsym $mod+Shift+$right move right
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
-# Workspaces:
-    #
-    # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
-
-    bindsym $mod+$alt+1 move container to workspace number 1, workspace number 1 
-    bindsym $mod+$alt+2 move container to workspace number 2, workspace number 2
-    bindsym $mod+$alt+3 move container to workspace number 3, workspace number 3
-    bindsym $mod+$alt+4 move container to workspace number 4, workspace number 4
-    bindsym $mod+$alt+5 move container to workspace number 5, workspace number 5
-    bindsym $mod+$alt+6 move container to workspace number 6, workspace number 6
-    bindsym $mod+$alt+7 move container to workspace number 7, workspace number 7
-    bindsym $mod+$alt+8 move container to workspace number 8, workspace number 8
-    bindsym $mod+$alt+9 move container to workspace number 9, workspace number 9
-    bindsym $mod+$alt+0 move container to workspace number 10, workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
 	
 # Window Rules
-	for_window [class="Spotify"] move container to workspace 5
-	for_window [class="discord"] move container to workspace 6
-	for_window [class="zoom"]    move container to workspace 6
-	for_window [class="Wine"]    move container to workspace 8
-    for_window [app_id="lutris"] move container to workspace 8
-	for_window [app_id="xfce-polkit"] floating enable
-    for_window [app_id="Save File"] floating enable
-    for_window [app_id="pavucontrol"] floating enable
-    for_window [title="Firefox - Sharing Indicator"] floating enable
+for_window [class="Spotify"] move container to workspace 5
+for_window [class="discord"] move container to workspace 6
+for_window [class="zoom"]    move container to workspace 6
+for_window [class="Wine"]    move container to workspace 8
+for_window [app_id="lutris"] move container to workspace 8
+for_window [app_id="xfce-polkit"] floating enable
+for_window [app_id="Save File"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [title="Firefox - Sharing Indicator"] floating enable
 	
 #
 # Layout stuff:
 #
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+bindsym $mod+b splith
+bindsym $mod+v splitv
 
-    # Switch the current container between different layout styles
-    # bindsym $mod+s layout stacking
-    bindsym $mod+t layout tabbed
-    bindsym $mod+e layout toggle split
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+space floating toggle
+bindsym $mod+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+Shift+space focus mode_toggle
+bindsym $mod+Shift+space focus mode_toggle
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-	bindsym $mod+c focus child
+bindsym $mod+a focus parent
+bindsym $mod+c focus child
 
-
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+s move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move scratchpad
+bindsym $mod+s scratchpad show
 #
 # Resizing containers:
 #
@@ -228,6 +145,8 @@ mode "Media" {
     bindsym Right exec playerctl next
     bindsym $left exec playerctl previous
     bindsym $right exec playerctl next
+    bindsym $up exec playerctl next
+    bindsym $down exec playerctl previous 
     bindsym Up exec ~/scripts/volume.sh -i
     bindsym Down exec ~/scripts/volume.sh -d
     bindsym plus exec ~/scripts/volume.sh -i
@@ -256,33 +175,12 @@ bindsym XF86AudioRaiseVolume exec /home/fcomoreira/scripts/volume.sh -i
 bindsym XF86AudioLowerVolume exec /home/fcomoreira/scripts/volume.sh -d
 bindsym XF86AudioMute exec /home/fcomoreira/scripts/volume.sh -m
 bindsym XF86AudioMicMute exec /home/fcomoreira/scripts/volume.sh -mic
+bindsym XF86AudioNext exec /home/fcomoreira/scripts/volume.sh -n
+bindsym XF86AudioPrev exec /home/fcomoreira/scripts/volume.sh -p
+# bindsym XF86AudioMicMute exec /home/fcomoreira/scripts/volume.sh -mic
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-	swaybar_command waybar
- #    status_command i3status
-	# position top
-	# font pango:NotoSans Mono 10.5
-	# separator_symbol " | "
-	# workspace_min_width 30
-
- #    colors {
- #        background #1e222a
-	# 	statusline #abb2bf
-	# 	separator #4C566A
-
-	# 	focused_workspace #5e81ac #5e81ac #e6efff 
-	# 	active_workspace #282c34 #282c34 #e6efff 
-	# 	inactive_workspace #282c34 #282c34 #e5c07b 
-	# 	urgent_workspace #e06c75 #e06c75 #e6efff
-	# 	binding_mode #56b6c2 #56b6c2 #1e222a
- #    }
-}
 
 font pango:Inter 11
 default_border pixel 3
@@ -301,24 +199,8 @@ mouse_warping container
 
 popup_during_fullscreen smart 
 
-set $border_active_bg       #3b84c0
-set $border_active_fg       #e6efff
-set $border_inactive_bg     #353b45
-set $border_inactive_fg     #e6efff
-set $border_unfocused_bg    #5e81ac
-set $background             #2E3440
-
-# Window Border color
-# class                 border              background           text                indicator           child_border
-client.focused          $border_active_bg   $border_active_bg    $border_active_fg   $border_active_bg   $border_active_bg
-client.focused_inactive $border_inactive_bg $border_unfocused_bg $border_inactive_fg $border_inactive_bg $border_inactive_bg
-client.unfocused        $border_inactive_bg $border_inactive_bg $border_inactive_fg $border_inactive_bg $border_inactive_bg
-client.urgent           $border_inactive_bg $border_inactive_bg  $border_inactive_fg $border_inactive_bg $border_inactive_bg
-client.placeholder      $border_inactive_bg $border_inactive_bg  $border_inactive_fg $border_inactive_bg $border_inactive_bg
-client.background       $background
-
 # Do on Startup
-#
+
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
@@ -334,4 +216,43 @@ exec --no-startup-id light -N 10
 exec --no-startup-id /usr/libexec/xfce-polkit
 exec powerprofilesctl set power-saver
 
+# Workspaces:
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+$alt+1 move container to workspace number 1, workspace number 1 
+bindsym $mod+$alt+2 move container to workspace number 2, workspace number 2
+bindsym $mod+$alt+3 move container to workspace number 3, workspace number 3
+bindsym $mod+$alt+4 move container to workspace number 4, workspace number 4
+bindsym $mod+$alt+5 move container to workspace number 5, workspace number 5
+bindsym $mod+$alt+6 move container to workspace number 6, workspace number 6
+bindsym $mod+$alt+7 move container to workspace number 7, workspace number 7
+bindsym $mod+$alt+8 move container to workspace number 8, workspace number 8
+bindsym $mod+$alt+9 move container to workspace number 9, workspace number 9
+bindsym $mod+$alt+0 move container to workspace number 10, workspace number 10
+
+bindsym $mod+Left move container to output left, output left
+bindsym $mod+Right move container to output right, output right 
+
+include ./colors
 include /etc/sway/config.d/*

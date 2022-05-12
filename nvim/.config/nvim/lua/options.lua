@@ -3,8 +3,10 @@ vim.opt.backup = false
 vim.opt.undodir = "/home/fcomoreira/.vim/.undo/"
 vim.opt.mouse = "a"
 vim.opt.undofile = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.cmd 'autocmd BufEnter *.py setlocal tabstop=2 shiftwidth=2'
+vim.cmd 'autocmd BufEnter *.c* setlocal tabstop=2 shiftwidth=2'
 vim.o.expandtab = true
 vim.opt.number = true
 vim.opt.hidden = true

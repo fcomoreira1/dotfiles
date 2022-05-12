@@ -25,11 +25,11 @@ keymap("n", "<C-Left>", ":tabprevious<CR>", opts)
 keymap("n", "<C-Right>", ":tabnext<CR>", opts)
 keymap("n", "Q", ":noh<CR>", opts)
 keymap("v", "<C-c>", '"+y', opts)
-keymap("n", "<C-v>", '"+p', opts)
+keymap("", "<C-v>", '"+p', opts)
 keymap("i", "<C-v>", '"+p', opts)
 keymap("n", "<C-b>", '<C-v>', opts)
-keymap("n", "<Tab>", ">>_", opts)
-keymap("n", "<S-Tab>", "<<_", opts)
+--[[ keymap("n", "<Tab>", ">>_", opts)
+keymap("n", "<S-Tab>", "<<_", opts) ]]
 
 
 -- Normal --
@@ -93,10 +93,17 @@ keymap("n", "N", "Nzzzv", opts)
 keymap("n", "<C-f>", ":NvimTreeToggle<cr>", opts)
 keymap("n", "<C-t>", ":terminal<cr>", opts)
 keymap("n", "<C-s>", ":Startify<cr>", opts)
+keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
 
 -- Ultisnips
 vim.g.UltiSnipsListSnippets="<C-a>"
 vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'      
 vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
+keymap("i", "<C-Tab>", "<Plig>(ultisnips_jump_forward)", opts)
 vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
 vim.g.UltiSnipsRemoveSelectModeMappings = 0
+
+
+
+

@@ -27,6 +27,13 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'jghauser/auto-pandoc.nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-ts-autotag'
+
+Plug 'nvim-telescope/telescope.nvim'
+
 vim.call('plug#end')
 
 require "options"
@@ -44,3 +51,6 @@ require "user.galaxyline"
 require "user.bufferline"
 require "user.colorizer"
 require "user.toggleterm"
+require "user.autopairs"
+require "user.telescope"
+

@@ -49,7 +49,7 @@ gls.left[4] = {
 
 
 
-gls.left[5] = {
+--[[ gls.left[5] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
@@ -78,7 +78,7 @@ gls.left[8] = {
     icon = '  ',
     highlight = {colors.blue,colors.bg},
   }
-}
+} ]]
 
 gls.right[1] = {
   LineInfo = {

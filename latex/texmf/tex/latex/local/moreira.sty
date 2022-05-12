@@ -35,9 +35,11 @@
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm}
 \usepackage{xcolor}
+\usepackage{enumitem}
 \usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
+% \usepackage{minted}
 
 \setlength{\parindent}{0em}
 
@@ -146,7 +148,7 @@
 		leftline=true,
 		topline=false,
 		bottomline=false,
-		skipbelow=2pt,
+		skipbelow=1pt,
 		linecolor=black!40,
 		backgroundcolor=black!2,
 	}
@@ -189,8 +191,8 @@
 	\declaretheoremstyle[
 		headfont=\sffamily\bfseries,
 		postheadspace=0.1cm,
-		spaceabove=0.2cm,
-		spacebelow=0.2cm
+		spaceabove=-0.1cm,
+		spacebelow=0.1cm
 	]{basic}
 
 	\providecommand{\styleProof}{proofbox}

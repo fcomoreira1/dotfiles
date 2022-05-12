@@ -9,5 +9,5 @@ let g:vimtex_matchparen_enabled = 0
 let g:vimtex_syntax_enabled = 0
 
 " autocmd FileType tex setlocal conceallevel=1
-autocmd FileType tex setlocal tw=80
+autocmd FileType tex setlocal tw=95
 " let g:tex_conceal="abdgm"
