@@ -1,96 +1,107 @@
 // -*- mode: json -*-
 {
-	"layer": "bottom",
-	"position": "top",
+    "layer": "bottom",
+        "position": "top",
 
-	"modules-left": [
-		"sway/workspaces",
-		"custom/right-arrow-dark",
-		"sway/mode"
-	],
-	"modules-center": [
-        "idle_inhibitor",
-        "clock"
-	],
-	"modules-right": [
-        "custom/spotify",
-		"pulseaudio",
-        "backlight",
-        "network",
-		"battery",
-		"tray",
-	],
+        "modules-left": [
+            "sway/workspaces",
+            "custom/right-arrow-dark",
+            "sway/mode"
+        ],
+        "modules-center": [
+            "idle_inhibitor",
+            "clock"
+        ],
+        "modules-right": [
+            "custom/spotify",
+            "sway/language",
+            "pulseaudio",
+            "backlight",
+            "network",
+            "battery",
+            "tray",
+        ],
 
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"format": "{name}"
-	},
+        "sway/workspaces": {
+            "disable-scroll": true,
+            "format": "{name}"
+        },
 
-	"sway/mode": {
-	},
+        "sway/mode": {
+        },
 
-   "custom/spotify": {
-        "format": "{}",
-        "escape": true,
-        "return-type": "json",
-        "max-length": 40,
-        "exec": "/home/fcomoreira/.config/waybar/mediaplayer.py", 
-        "exec-if": "pgrep spotify"
-    }, 
-    "network": {
-        "format-wifi": " {essid}",
-        "format-ethernet": " {ifname}: {ipaddr}/{cidr}",
-        "format-disconnected": "⚠ Disconnected",
-    },
+        "custom/spotify": {
+            "format": "{}",
+            "escape": true,
+            "return-type": "json",
+            "max-length": 40,
+            "exec": "/home/fcomoreira/.config/waybar/mediaplayer.py", 
+            "exec-if": "pgrep spotify"
+        }, 
+        "network": {
+            "format-wifi": "  {essid}",
+            "format-ethernet": " {gwaddr}",
+            "format-disconnected": "⚠ Disconnected",
+        },
 
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "{icon} {percent}%",
-        "format-icons": [""]
-    },
-
-	"clock": {
-		"format": "{:%a %H:%M %d/%m}",
-		"tooltip": false
-	},
-	"pulseaudio": {
-		"format": "{icon} {volume:2}%",
-		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "MUTE",
-		"format-icons": {
-			"headphones": "",
-			"default": [
-				"",
-				""
-			]
-		},
-		"scroll-step": 1,
-		"on-click": "pavucontrol"
-	},
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
+        "backlight": {
+            "device": "intel_backlight",
+            "format": "{icon}  {percent}%",
+            "format-icons": [""]
+        },
+        "sway/language": {
+            "format": "{}",
+            "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+        },
+        "clock": {
+            "format": "{:%a %H:%M %d/%m}",
+            "tooltip": false
+        },
+        "custom/weather": {
+            "format": "{}",
+            "tooltip": true,
+            "interval": 3600,
+            "exec": "/home/fcomoreira/.config/waybar/waybar-wttr.py",
+            "return-type": "json"
+        },
+        "pulseaudio": {
+            "format": "{icon}  {volume:2}%",
+            "format-bluetooth": "{icon}  {volume}%",
+            "format-muted": "MUTE",
+            "format-icons": {
+                "headphones": "",
+                "default": [
+                    "",
+                ""
+                ]
+            },
+            "scroll-step": 1,
+            "on-click": "pavucontrol"
+        },
+        "idle_inhibitor": {
+            "format": "{icon}",
+            "format-icons": {
+                "activated": "",
+                "deactivated": ""
+            }
+        },
+        "battery": {
+            "states": {
+                "good": 70,
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "{icon}   {capacity}%",
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                "",
+            ],
+            "format-charging": "  {capacity}%",
+        },
+        "tray": {
+            "icon-size":18 
         }
-    },
-	"battery": {
-		"states": {
-			"good": 95,
-			"warning": 30,
-			"critical": 15
-		},
-		"format": "{icon} {capacity}%",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			"",
-		],
-		"format-charging": " {capacity}%",
-	},
-	"tray": {
-		"icon-size":18 
-	}
 }

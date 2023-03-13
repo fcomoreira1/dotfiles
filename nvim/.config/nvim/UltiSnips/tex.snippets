@@ -12,7 +12,7 @@ snippet mtex "default" bA
 \documentclass{scrartcl}
 
 \usepackage[font$1]{moreira}
-\author{Francisco Moreira}
+\author{Francisco Moreira Machado$2}
 
 \title{$2}
 
@@ -31,12 +31,12 @@ else:
 `$2
 endsnippet
 
-# #context "math()"
+# context "math()"
 snippet ~~ "approx" A
 \approx
 endsnippet
 
-# #context "math()"
+# context "math()"
 snippet ~= "cong" iA
 \cong
 endsnippet
@@ -54,22 +54,22 @@ $1
 .\] $0
 endsnippet
 
-context "math()"
+# context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
-context "math()"
+# context "math()"
 snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet
 
-#context "math()"
+# context "math()"
 snippet __ "subscript" iA
 _{$1}$0
 endsnippet
 
-#context "math()"
+# context "math()"
 snippet ^^ "power" iA
 ^{$1}$0
 endsnippet
@@ -91,17 +91,17 @@ snippet item "Itemize" bA
 \end{itemize}
 endsnippet
 
-#context "math()"
+# context "math()"
 snippet => "implies" Ai
 \implies 
 endsnippet
 
-#context "math()"
+# context "math()"
 snippet =< "implied by" Ai
 \impliedby 
 endsnippet
 
-#context "math()"
+# context "math()"
 snippet iff "iff" A
 \iff 
 endsnippet
@@ -221,32 +221,32 @@ snippet floor "floor" A
 endsnippet
 
 #context "math()"
-snippet lr "left( right)" i
+snippet lr "left( right)" 
 \left( ${1:${VISUAL}} \right)$0
 endsnippet
 
 #context "math()"
-snippet () "left( right)" i
+snippet () "left( right)" 
 \left( ${1:${VISUAL}} \right)$0
 endsnippet
 
 #context "math()"
-snippet lr( "left( right)" i
+snippet lr( "left( right)" 
 \left( ${1:${VISUAL}} \right)$0
 endsnippet
 
 #context "math()"
-snippet lr| "left| right|" i
+snippet lr| "left| right|" 
 \left| ${1:${VISUAL}} \right|$0
 endsnippet
 
 #context "math()"
-snippet lr{ "left\{ right\}" i
+snippet lr{ "left\{ right\}" 
 \left\\{ ${1:${VISUAL}} \right\\}$0
 endsnippet
 
 #context "math()"
-snippet lrb "left\{ right\}" i
+snippet lrb "left\{ right\}" 
 \left\\{ ${1:${VISUAL}} \right\\}$0
 endsnippet
 

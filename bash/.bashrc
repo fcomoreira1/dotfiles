@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -117,19 +117,15 @@ fi
 #ignore upper and lower case when TAB completion
 bind "set completion-ignore-case on"
 
-alias rotateback='xrandr --output eDP-1 --rotate normal'	
-alias wifi='nmcli c'
-alias wificon='nmcli device wifi connect'
-alias wificon5g='nmcli device wifi connect "Casa 1 5g" password "JFRL2406"'
-alias wificon1='nmcli device wifi connect "Casa 1" password "JFRL2406"'
-alias i3conf='vim ~/.config/i3/config'
-alias alaconf='vim ~/.config/alacritty/alacritty.yml'
-alias polyconf='vim ~/.config/polybar/config'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias spicetify='~/spicetify-cli/spicetify'
-alias vim='nvim'
-alias swayconf='vim ~/.config/sway/config'
-alias wayconf='vim ~/.config/waybar/'
-alias brc='vim ~/.bashrc'
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+# alias wifi='nmcli c'
+# alias ..='cd ..'
+# alias ...='cd ../..'
+# alias vim='nvim'
+# alias py3="python3"
+# alias mtex="nvim /home/fcomoreira/texmf/tex/latex/local/moreira.sty"
+# alias lazyconfig='lazygit --git-dir=$HOME/dotfiles --work-tree=$HOME'
+# alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+
+# export EDITOR="nvim"
+# export PDFVIEWER='zathura'
+# export GROFF_NO_SGR='1'

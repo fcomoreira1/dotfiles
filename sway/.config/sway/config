@@ -1,77 +1,90 @@
 set $mod Mod4
+floating_modifier $mod normal 
 set $alt Mod1
 set $left h
 set $down j
 set $up k
 set $right l
-set $term alacritty
-# set $browser brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland 
-# set $browser-icognito $browser --incognito
-set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland 
+set $term kitty
+# set $browser google-chrome --enable-features=WebUIDarkMode --force-dark-mode --enable-features=UseOzonePlatform --ozone-platform=wayland
+set $browser brave-browser
 set $browser-icognito $browser --incognito
 # set $browser firefox
-# set $browser-icognito firefox -private-window
+# set $browser-icognito $browser -private-window
 set $menu ~/scripts/menu.sh
 set $lock_bg /home/fcomoreira/pictures/Wallpapers/IMG_5458.JPG
-set $wallpaper1 /home/fcomoreira/pictures/Wallpapers/max-suleimanov-dv-132.jpg
-set $wallpaper2 /home/fcomoreira/pictures/Wallpapers/max-suleimanov-dv-132.jpg
+# set $wallpaper1 /home/fcomoreira/pictures/Wallpapers/daniel-sessler-oyXYkH0jxJY-unsplash.jpg
+set $wallpaper1 /home/fcomoreira/pictures/Wallpapers/luca-micheli-ruWkmt3nU58-unsplash.jpg
+set $wallpaper2 /home/fcomoreira/pictures/Wallpapers/planets.png
+set $laptop eDP-1 
+set $monitor1 HDMI-A-1
+set $monitor2 DP-2 
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg /home/fcomoreira/pictures/Wallpapers/wallhaven-rddgwm_1920x1080.png stretch 
-output eDP-1 bg $wallpaper1 stretch
-output HDMI-A-1 bg $wallpaper2 stretch
 
-output eDP-1 pos 0 0
+output $laptop bg $wallpaper1 fill
+output $monitor1 bg $wallpaper1 stretch
+output $monitor2 bg $wallpaper1 stretch
+
+output $laptop pos 0 0
+output $laptop max_render_time 5 
+output HDMI-A-1 max_render_time 3
 output HDMI-A-1 subpixel rgb \
         res 1920x1080@74.906Hz \
         position 1920 0 \
         adaptive_sync on
 
-exec swayidle \
-		 timeout 720 'systemctl suspend'\
-         before-sleep 'playerctl -a pause && swaylock -f -s stretch -i $lock_bg'\
-         lock 'playerctl -a pause && swaylock -f -c 101010'
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+bindsym $mod+Shift+o output $laptop enable
 
+exec swayidle \
+  timeout 720 'systemctl suspend'\
+  before-sleep 'playerctl -a pause'\
+  lock 'playerctl -a pause'
 
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
 
 input "1267:12679:ELAN0672:00_04F3:3187_Touchpad" {
-   dwt enabled
-   tap enabled
-   natural_scroll enabled
-   middle_emulation enabled
+  dwt enabled
+  tap enabled
+  natural_scroll enabled
+  middle_emulation enabled
+  scroll_factor 0.4
 }
 
+input "5426:77:Razer_Razer_DeathAdder" {
+  scroll_factor 1.5
+}
+input "1133:45082:MX_Anywhere_2S_Mouse" {
+  scroll_factor 0.7
+}
 input "type:keyboard" {
-    xkb_layout us,br
-    xkb_options grp:shift_toggle
+  xkb_layout us,br
+  xkb_options grp:shift_toggle
 }
 
-bindsym $mod+Return exec $term -e fish
+bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu -run
 bindsym $mod+w exec $menu -window
 bindsym $mod+Shift+w exec /home/fcomoreira/scripts/wifimenu.sh
 
-bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
 bindsym $mod+i exec $browser 
 bindsym $mod+Shift+i exec $browser-icognito 
 bindsym $mod+n exec nautilus 
 bindsym $mod+Escape exec $menu -power 
 
-floating_modifier $mod normal
-
-
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # Dunst:
-bindsym $alt+space exec dunstctl close
-bindsym $alt+grave exec dunstctl history-pop
-bindsym $alt+p exec dunstctl toggle
+# bindsym $alt+space exec dunstctl close
+# bindsym $alt+grave exec dunstctl history-pop
+# bindsym $alt+p exec dunstctl toggle
+bindsym $mod+Shift+n exec swaync-client -t -sw
+bindsym $alt+space exec swaync-client --hide-latest -sw
 
 # Moving around:
 
@@ -93,17 +106,34 @@ for_window [class="Spotify"] move container to workspace 5
 for_window [class="discord"] move container to workspace 6
 for_window [class="zoom"]    move container to workspace 6
 for_window [class="Wine"]    move container to workspace 8
+for_window [class="gamescope"] floating enable
 for_window [app_id="lutris"] move container to workspace 8
+for_window [app_id="steam"] move container to workspace 8
+for_window [app_id="xpad"] floating enable
 for_window [app_id="xfce-polkit"] floating enable
-for_window [app_id="Save File"] floating enable
+for_window [app_id="^Save.*File"] floating enable
 for_window [app_id="pavucontrol"] floating enable
-for_window [title="Firefox - Sharing Indicator"] floating enable
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="blueman-manager"] floating enable
+for_window [app_id="com.github.wwmm.easyeffects"] floating enable
+for_window [title="^Firefox.*Sharing.Indicator"] kill 
+for_window [title="^Open File$"] floating enable
+for_window [title="Extension:.*(MetaMask).*"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [instance="update_installer"] floating enable
 	
 #
 # Layout stuff:
-#
-bindsym $mod+b splith
-bindsym $mod+v splitv
+# bindsym $mod+p exec --no-startup-id ~/.config/sway/promote-window.py -focus
+# bindsym $mod+Shift+p exec --no-startup-id ~/.config/sway/promote-window.py -swap
+
+bindsym $mod+v splith
+bindsym $mod+x splitv
 
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
@@ -140,7 +170,7 @@ mode "Resize" {
 bindsym $mod+r mode "Resize"
 
 mode "Media" {
-    bindsym p exec ~/scripts/menu.sh -pause 
+    bindsym p exec ~/scripts/menu.sh -pause, mode "default" 
     bindsym Left exec playerctl previous
     bindsym Right exec playerctl next
     bindsym $left exec playerctl previous
@@ -159,39 +189,65 @@ mode "Media" {
 bindsym $mod+m mode "Media"
 
 mode "Courses" {
-    bindsym a exec ~/scripts/courses.py -add
-    bindsym t exec ~/scripts/courses.py -hmw
-    bindsym x exec ~/scripts/courses.py -books
+    bindsym a exec ~/scripts/courses.py -add, mode "default"
+    bindsym t exec ~/scripts/courses.py -hmw, mode "default"
+    bindsym x exec ~/scripts/courses.py -books, mode "default"
 
     bindsym Escape mode "default"
 }
-bindsym $mod+x mode "Courses"
+# bindsym $alt+c mode "Courses"
+bindsym $alt+c exec ~/scripts/courses.py
+exec_always "pkill -f 'python3? .+/swaymonad.py';  ~/.config/sway/swaymonad/swaymonad.py"
+bindsym $mod+p nop promote_window
+bindsym $mod+Down nop swap_with_next_window
+bindsym $mod+Up nop swap_with_prev_window
+focus_wrapping no
+mode "layout" {
+    bindsym t nop set_layout tall
+    bindsym 3 nop set_layout 3_col
+    bindsym n nop set_layout nop
+    bindsym x nop reflectx
+    bindsym y nop reflecty
+    bindsym $mod+t nop transpose
+    bindsym Comma nop increment_masters
+    bindsym Period nop decrement_masters
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+z mode "layout"
+mode "Screenshot" {
+  bindsym s exec /home/fcomoreira/scripts/screenshot.sh -s, mode "default"
+  bindsym p exec /home/fcomoreira/scripts/screenshot.sh, mode "default"
+  bindsym c exec /home/fcomoreira/scripts/screenshot.sh -c, mode "default"
+
+  bindsym Escape mode "default"
+}
+bindsym Print mode "Screenshot"
 
 # Media Keys
 
-bindsym Print exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh -s
-bindcode 642   exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh 
+# bindsym Print exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh -s
+# bindcode 642   exec --no-startup-id /home/fcomoreira/scripts/screenshot.sh 
 bindsym XF86AudioRaiseVolume exec /home/fcomoreira/scripts/volume.sh -i 
 bindsym XF86AudioLowerVolume exec /home/fcomoreira/scripts/volume.sh -d
 bindsym XF86AudioMute exec /home/fcomoreira/scripts/volume.sh -m
 bindsym XF86AudioMicMute exec /home/fcomoreira/scripts/volume.sh -mic
 bindsym XF86AudioNext exec /home/fcomoreira/scripts/volume.sh -n
 bindsym XF86AudioPrev exec /home/fcomoreira/scripts/volume.sh -p
-# bindsym XF86AudioMicMute exec /home/fcomoreira/scripts/volume.sh -mic
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 
 
-
-font pango:Inter 11
-default_border pixel 3
-default_floating_border pixel 3 
+font pango:Inter Medium 12 
+default_border pixel 2
+default_floating_border pixel 3
 floating_maximum_size -1 x -1
 smart_gaps on
 smart_borders on
-gaps inner 3
-gaps outer 3 
+gaps inner 4
+gaps outer 6 
 
-title_align center
+# title_align center
 titlebar_padding 3
 
 focus_follows_mouse always
@@ -202,19 +258,24 @@ popup_during_fullscreen smart
 # Do on Startup
 
 set $gnome-schema org.gnome.desktop.interface
+seat seat0 xcursor_theme Breeze_Snow 24 
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Adwaita-dark'
-    gsettings set $gnome-schema icon-theme 'Papirus-Dark'
-    gsettings set $gnome-schema cursor-theme 'Breeze_Snow'
-    gsettings set $gnome-schema font-name 'Inter Medium 11'
+    gsettings set $gnome-schema gtk-theme Adwaita
+    gsettings set $gnome-schema gtk-application-prefer-dark-theme true
+    gsettings set $gnome-schema icon-theme Papirus-Dark
+    gsettings set $gnome-schema cursor-theme Breeze_Snow
+    gsettings set $gnome-schema font-name 'Inter 11'
     gsettings set org.gnome.desktop.default-applications.terminal exec $term
     gsettings set org.gnome.desktop.default-applications.terminal exec-arg -e
 }
 
-exec --no-startup-id light -N 10
-exec --no-startup-id /usr/libexec/xfce-polkit
-exec powerprofilesctl set power-saver
+exec --no-startup-id light -N 5 
+# exec --no-startup-id /usr/libexec/xfce-polkit
+exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+exec --no-startup-id nm-applet --indicator
+exec --no-startup-id blueman-applet 
+exec --no-startup-id swaync
 
 # Workspaces:
 
@@ -253,6 +314,9 @@ bindsym $mod+$alt+0 move container to workspace number 10, workspace number 10
 
 bindsym $mod+Left move container to output left, output left
 bindsym $mod+Right move container to output right, output right 
+
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Right move workspace to output right
 
 include ./colors
 include /etc/sway/config.d/*

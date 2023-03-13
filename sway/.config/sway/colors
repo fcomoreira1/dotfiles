@@ -1,0 +1,41 @@
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+	swaybar_command waybar
+ #    status_command i3status
+	# position top
+	# font pango:NotoSans Mono 10.5
+	# separator_symbol " | "
+	# workspace_min_width 30
+
+ #    colors {
+ #        background #1e222a
+	# 	statusline #abb2bf
+	# 	separator #4C566A
+
+	# 	focused_workspace #5e81ac #5e81ac #e6efff 
+	# 	active_workspace #282c34 #282c34 #e6efff 
+	# 	inactive_workspace #282c34 #282c34 #e5c07b 
+	# 	urgent_workspace #e06c75 #e06c75 #e6efff
+	# 	binding_mode #56b6c2 #56b6c2 #1e222a
+ #    }
+}
+
+set $border_active_id       #56b6c2
+set $border_active_bg       #abb2bf
+set $border_active_fg       #353b45
+set $border_inactive_bg     #353b45
+set $border_inactive_fg     #e6efff
+set $border_unfocused_bg    #5e81ac
+set $background             #2E3440
+
+# Window Border color
+#
+# class                 border              background           text                indicator           child_border
+client.focused          $border_active_bg   $border_active_bg    $border_active_fg   $border_active_id   $border_active_bg
+client.focused_inactive $border_inactive_bg $border_unfocused_bg $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.unfocused        $border_inactive_bg $border_inactive_bg  $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.urgent           $border_inactive_bg $border_inactive_bg  $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.placeholder      $border_inactive_bg $border_inactive_bg  $border_inactive_fg $border_inactive_bg $border_inactive_bg
+client.background       $background

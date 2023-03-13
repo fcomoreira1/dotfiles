@@ -1,4 +1,3 @@
-au FileType vimwiki setlocal shiftwidth=6 tabstop=6 noexpandtab
 let g:vimwiki_list = [{'path': '~/wiki', 'syntax': 'markdown', 
 			\'ext': '.md',
 			\'nested_syntaxes': {'python': 'python', 'c++': 'cpp'},

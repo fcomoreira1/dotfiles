@@ -1,0 +1,1 @@
+-- vim.cmd "let g:vimtex_compiler_engine = 'lualatex'"

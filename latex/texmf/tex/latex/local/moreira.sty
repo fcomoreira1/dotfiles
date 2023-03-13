@@ -36,12 +36,12 @@
 \usepackage{amsthm}
 \usepackage{xcolor}
 \usepackage{enumitem}
-\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+\usepackage[a4paper, total={6.0in, 9.0in}]{geometry}
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
 % \usepackage{minted}
 
-\setlength{\parindent}{0em}
+% \setlength{\parindent}{0em}
 
 % Hyperref
 \definecolor{linkBlue}{HTML}{1A0DAB}
@@ -191,12 +191,14 @@
 	\declaretheoremstyle[
 		headfont=\sffamily\bfseries,
 		postheadspace=0.1cm,
-		spaceabove=-0.1cm,
-		spacebelow=0.1cm
+		spaceabove=0.2cm,
+		spacebelow=0.2cm
 	]{basic}
 
 	\providecommand{\styleProof}{proofbox}
+	\providecommand{\styleSolution}{proofbox}
 	\providecommand{\styleFact}{basic}
+	\providecommand{\styleNotation}{basic}
 	\providecommand{\styleThm}{thmbox}
 	\providecommand{\styleLemma}{lemmabox}
 	\providecommand{\styleCorollary}{tealbox}
@@ -216,6 +218,8 @@
 		spacebelow=0.2cm
 	]{basic}
 	\providecommand{\styleProof}{basic}
+    \providecommand{\styleSolution}{basic}
+	\providecommand{\styleNotation}{basic}
 	\providecommand{\styleProb}{basic}
 	\providecommand{\styleFact}{basic}
 	\providecommand{\styleThm}{basic}
@@ -233,7 +237,7 @@
 \ifmoreirasexyprob
 	\mdfdefinestyle{mdblackbox}{%
 		skipabove=8pt,
-		linewidth=3pt,
+		linewidth=8pt,
 		rightline=false,
 		leftline=true,
 		topline=false,
@@ -244,8 +248,8 @@
 	\declaretheoremstyle[
 		headfont=\sffamily\bfseries,
 		bodyfont=\normalfont,
-		spaceabove=0pt,
-		spacebelow=0pt,
+		spaceabove=1cm,
+		spacebelow=0.2cm,
 		mdframed={style=mdblackbox}
 	]{problembox}
 	\providecommand{\styleProb}{problembox}
@@ -256,11 +260,13 @@
 \let\proof\relax
 \ifmoreiraEng
 	\providecommand{\nameProof}{Proof}
+	\providecommand{\nameSolution}{Solution}
 	\providecommand{\nameSketch}{Sketch}
 	\providecommand{\nameTheorem}{Theorem}
 	\providecommand{\nameLemma}{Lemma}
 	\providecommand{\nameCorollary}{Corollary}
 	\providecommand{\nameProposition}{Proposition}
+    \providecommand{\nameNotation}{Notation}
     \providecommand{\nameRemark}{Remark}
     \providecommand{\nameProperty}{Property}
 	\providecommand{\nameFact}{Fact}
@@ -275,6 +281,7 @@
 \fi
 \ifmoreiraPt
 	\providecommand{\nameProof}{Prova}
+	\providecommand{\nameSolution}{Solução}
 	\providecommand{\nameSketch}{Rascunho da Prova}
 	\providecommand{\nameTheorem}{Teorema}
 	\providecommand{\nameLemma}{Lema}
@@ -293,6 +300,7 @@
 \fi
 
 \declaretheorem[style=\styleProof,name=\nameProof,numbered=no]{proof}
+\declaretheorem[style=\styleSolution,name=\nameSolution,numbered=no]{solution}
 \declaretheorem[style=\styleProof,name=\nameSketch,numbered=no]{sketch}
 \declaretheorem[style=\styleThm,name=\nameTheorem,parent=section]{theorem}
 \declaretheorem[style=\styleThm,name=\nameTheorem,numbered=no]{theorem*}
@@ -301,7 +309,8 @@
 \declaretheorem[style=\styleCorollary,name=\nameCorollary,sibling=theorem]{corollary}
 \declaretheorem[style=\styleProp,name=\nameProposition,sibling=theorem]{proposition}
 \declaretheorem[style=\styleProp,name=\nameProposition,numbered=no]{proposition*}
-\declaretheorem[style=\styleRemark,name=\nameRemark,sibling=theorem]{remark}
+\declaretheorem[style=\styleNotation,name=\nameNotation,numbered=no]{notation}
+\declaretheorem[style=\styleRemark,name=\nameRemark]{remark}
 \declaretheorem[style=\styleRemark,name=\nameRemark,numbered=no]{remark*}
 \declaretheorem[style=\styleFact,name=\nameFact,sibling=theorem]{fact}
 
@@ -362,8 +371,8 @@
 	\usepackage{fancyhdr}
 	\pagestyle{fancy}
 	\fancyhf{}
-	\lhead{\bfseries \@author}
-	\rhead{\bfseries \@title}
+	\rhead{\bfseries \@author}
+	\lhead{\bfseries \@title}
 	\cfoot{\thepage}
 \fi
 

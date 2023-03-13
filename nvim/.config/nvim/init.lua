@@ -1,56 +1,80 @@
-local Plug = vim.fn['plug#']
+require "user.options"
 
-vim.call('plug#begin', '~/.config/nvim/plugged')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'b3nj5m1n/kommentary'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'neovim/nvim-lspconfig'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'mhinz/vim-startify'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-omni'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'SirVer/ultisnips'
-Plug 'lervag/vimtex'
-Plug 'kdheepak/lazygit.nvim'
-Plug "vimwiki/vimwiki"
-Plug ('glepnir/galaxyline.nvim' , {branch = 'main'})
-Plug 'akinsho/nvim-bufferline.lua'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'akinsho/toggleterm.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
+local plugins = {
+  -- Treesitter
+  "nvim-treesitter/nvim-treesitter",
+  "nvim-treesitter/nvim-treesitter-context",
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'jghauser/auto-pandoc.nvim'
-Plug 'windwp/nvim-autopairs'
-Plug 'windwp/nvim-ts-autotag'
+  -- LSP
+  "neovim/nvim-lspconfig",
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "hrsh7th/nvim-cmp",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-path",
+  "hrsh7th/cmp-cmdline",
+  "hrsh7th/cmp-omni",
+  "SirVer/ultisnips",
+  "quangnguyen30192/cmp-nvim-ultisnips",
+  "ray-x/lsp_signature.nvim",
+  "j-hui/fidget.nvim",
 
-Plug 'nvim-telescope/telescope.nvim'
+  -- File Type Specific
+  --  "Vimjas/vim-python-pep8-indent"
+  "lervag/vimtex",
+  "vimwiki/vimwiki",
+  "windwp/nvim-ts-autotag",
+  "nvim-neorg/neorg",
+  "whonore/Coqtail",
 
-vim.call('plug#end')
+  -- Visual
+  "nvim-lualine/lualine.nvim",
+  "akinsho/nvim-bufferline.lua",
+  "norcalli/nvim-colorizer.lua",
+  "navarasu/onedark.nvim",
 
-require "options"
-require "keymaps"
-require "color"
-require "lsp"
-require "startify"
-require "treesitter"
-require "cmp-lsp"
-require "vimtex"
-require "user.lazygit"
-require "ultisnips"
-require "vimwiki"
-require "user.galaxyline"
-require "user.bufferline"
-require "user.colorizer"
-require "user.toggleterm"
-require "user.autopairs"
-require "user.telescope"
+  -- Miscellanea
+  "b3nj5m1n/kommentary",
+  "kyazdani42/nvim-tree.lua",
+  "mhinz/vim-startify",
+  "kdheepak/lazygit.nvim",
+  "akinsho/toggleterm.nvim",
+  "lukas-reineke/indent-blankline.nvim",
+  "windwp/nvim-autopairs",
+  "antoinemadec/FixCursorHold.nvim",
+  "kosayoda/nvim-lightbulb",
+  {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("trouble").setup {}
+    end,
+  },
+  "danymat/neogen",
+  "mbbill/undotree",
+}
 
+local opts = {}
+
+require("lazy").setup(plugins)
+
+require "user.color"
+require "user.keymaps"

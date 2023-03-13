@@ -17,6 +17,9 @@ window {
     font-family: Inter Medium;
     border-radius: 5px;
 }
+.entry {
+    max-width: 90vw;
+}
 
 #input {
     margin: 5px;

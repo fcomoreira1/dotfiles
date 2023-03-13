@@ -14,8 +14,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Inter Medium;
-    font-size: 14px;
+    font-family: Inter Medium, JetBrainsMono Nerd Font;
+    font-size: 13.5px;
     min-height: 0;
 }
 
@@ -60,10 +60,14 @@ window#waybar {
     font-size: 15px;
 }
 
-#clock, #battery, #pulseaudio, #network, #backlight {
+#clock, #battery, #pulseaudio, #network, #backlight, #language {
 	background-color: @gray;
 	padding: 0px 10px;
 	margin: 5px 0px;
+}
+
+#language {
+  padding: 0px 2px 0px 10px;
 }
 
 #tray {
@@ -93,7 +97,7 @@ window#waybar {
     background-color: @red;
 }
 
-#pulseaudio {
+#language {
 	border-radius: 5px 0px 0px 5px;
 }
 

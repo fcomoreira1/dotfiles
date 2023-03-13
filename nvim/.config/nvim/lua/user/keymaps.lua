@@ -1,14 +1,8 @@
 local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
-
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
-
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local keymap = vim.keymap.set
 
 -- Modes
 --   normal_mode = "n",
@@ -19,8 +13,7 @@ vim.g.maplocalleader = " "
 --   command_mode = "c",
 
 -- Quality of Life
-keymap("n", ";", ":", {noremap = true})
-keymap("n", ":", ";", {noremap = true})
+keymap("n", "x", '"_x', opts)
 keymap("n", "<C-Left>", ":tabprevious<CR>", opts)
 keymap("n", "<C-Right>", ":tabnext<CR>", opts)
 keymap("n", "Q", ":noh<CR>", opts)
@@ -28,18 +21,22 @@ keymap("v", "<C-c>", '"+y', opts)
 keymap("", "<C-v>", '"+p', opts)
 keymap("i", "<C-v>", '"+p', opts)
 keymap("n", "<C-b>", '<C-v>', opts)
---[[ keymap("n", "<Tab>", ">>_", opts)
-keymap("n", "<S-Tab>", "<<_", opts) ]]
-
+keymap("n", "<F11>", ':set spell!<CR>', opts)
+keymap("i", "<F11>", '<C-O>:set spell!<CR>', opts)
+keymap("i", "<C-l>", '<c-g>u<Esc>[s1z=`]a<c-g>u', opts)
 
 -- Normal --
 -- Better window navigation
-keymap("n", "<leader>h", "<C-w>h", opts)
-keymap("n", "<leader>j", "<C-w>j", opts)
-keymap("n", "<leader>k", "<C-w>k", opts)
-keymap("n", "<leader>l", "<C-w>l", opts)
-
-keymap("n", "<leader>e", ":Lex 30<cr>", opts)
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
+-- Terminal --
+-- Better terminal navigation
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -54,30 +51,18 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Insert --
 -- Press jk fast to enter
 -- keymap("i", "jk", "<ESC>", opts)
-
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
 -- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
--- Terminal --
--- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("x", "J", ":move '>+1<CR>gv=gv", opts)
+keymap("x", "K", ":move '<-2<CR>gv=gv", opts)
 
 -- Undo breakpoints
 keymap("i", ",", ",<c-g>u", opts)
@@ -91,19 +76,13 @@ keymap("n", "N", "Nzzzv", opts)
 
 -- Plugins
 keymap("n", "<C-f>", ":NvimTreeToggle<cr>", opts)
-keymap("n", "<C-t>", ":terminal<cr>", opts)
-keymap("n", "<C-s>", ":Startify<cr>", opts)
-keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>\\", "<cmd>ToggleTerm direction=float<CR>", opts)
+keymap("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Ultisnips
-vim.g.UltiSnipsListSnippets="<C-a>"
-vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'      
+--[[ vim.g.UltiSnipsListSnippets = "<C-a>"
+vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
 vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
-keymap("i", "<C-Tab>", "<Plig>(ultisnips_jump_forward)", opts)
+keymap("i", "<C-Tab>", "<Plug>(ultisnips_jump_forward)", opts)
 vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
-vim.g.UltiSnipsRemoveSelectModeMappings = 0
-
-
-
-
+vim.g.UltiSnipsRemoveSelectModeMappings = 0 ]]
