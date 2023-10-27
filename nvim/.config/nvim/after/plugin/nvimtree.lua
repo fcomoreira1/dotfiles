@@ -3,12 +3,12 @@
 -- setup with all defaults
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 -- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).
-require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
   auto_reload_on_write = true,
   create_in_closed_folder = false,
   disable_netrw = false,
   hijack_cursor = false,
-  hijack_netrw = true,
+  --[[ hijack_netrw = true,
   hijack_unnamed_buffer_when_opening = false,
   ignore_buffer_on_setup = false,
   open_on_setup = false,
@@ -132,5 +132,5 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
     open_file = {
       quit_on_open = false,
     }
-  }
+  } ]]
 } -- END_DEFAULT_OPTS

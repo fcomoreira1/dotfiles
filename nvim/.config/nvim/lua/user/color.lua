@@ -1,12 +1,4 @@
--- vim.cmd('colorscheme onedark')
-require('onedark').setup {
-  style = 'darker',
-  -- transparent = true,
-  lualine = {
-    transparent = false, -- lualine center bar transparency
-  },
-}
-require('onedark').load()
+vim.cmd.colorscheme "catppuccin-mocha"
 
 -- Syntax highlighting
 vim.cmd 'autocmd BufNewFile,BufRead *.rasi setf css'

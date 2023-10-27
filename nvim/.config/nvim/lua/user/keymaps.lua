@@ -25,6 +25,15 @@ keymap("n", "<F11>", ':set spell!<CR>', opts)
 keymap("i", "<F11>", '<C-O>:set spell!<CR>', opts)
 keymap("i", "<C-l>", '<c-g>u<Esc>[s1z=`]a<c-g>u', opts)
 
+keymap('n', '<PageUp>', '<NOP>', { noremap = true, silent = true })
+keymap('n', '<PageDown>', '<NOP>', { noremap = true, silent = true })
+keymap('i', '<PageUp>', '<NOP>', { noremap = true, silent = true })
+keymap('i', '<PageDown>', '<NOP>', { noremap = true, silent = true })
+keymap("n", "<S-Up>", "k", opts)
+keymap("n", "<S-Down>", "j", opts)
+keymap("n", "<S-Left>", "l", opts)
+keymap("n", "<S-Right>", "h", opts)
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -34,6 +43,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 -- Terminal --
 -- Better terminal navigation
 keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<Esc>", "<C-\\><C-N>", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
@@ -76,8 +86,7 @@ keymap("n", "N", "Nzzzv", opts)
 
 -- Plugins
 keymap("n", "<C-f>", ":NvimTreeToggle<cr>", opts)
-keymap("n", "<leader>\\", "<cmd>ToggleTerm direction=float<CR>", opts)
-keymap("n", "<leader>u", vim.cmd.UndotreeToggle)
+keymap("n", "<leader>\\", "<cmd>2.ToggleTerm direction=float<CR>", opts)
 
 -- Ultisnips
 --[[ vim.g.UltiSnipsListSnippets = "<C-a>"

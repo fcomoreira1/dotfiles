@@ -57,6 +57,7 @@ local on_attach = function(client, bufnr)
   keymap("n", "gL", "<cmd>TroubleToggle<CR>", opts)
   keymap("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
   keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  keymap("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format(nil, 100)<CR>", opts)
   keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   keymap("n", "<leader>l", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
@@ -64,16 +65,16 @@ local on_attach = function(client, bufnr)
   keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   -- lsp_highlight_document(client)
 end
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig.pyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
     python = {
-      --[[ analysis = {
-                typeCheckingMode = "off"
-            } ]]
+      analysis = {
+        typeCheckingMode = "off"
+      }
     }
   },
 }
@@ -81,6 +82,15 @@ lspconfig.intelephense.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
+lspconfig.ocamllsp.setup {
+  cmd = { "ocamllsp" },
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+  root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+  on_attach = on_attach,
+  capabilities = capabilities,
+
+}
+
 lspconfig.clangd.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -88,10 +98,6 @@ lspconfig.clangd.setup {
 lspconfig.hls.setup {
   on_attach = on_attach,
   capabilites = capabilities,
-}
-lspconfig.ltex.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
 }
 lspconfig.tsserver.setup {
   on_attach = on_attach,
@@ -137,5 +143,6 @@ vim.cmd 'autocmd BufWritePre *.h lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.js* lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.ts* lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.lua lua vim.lsp.buf.format(nil, 100)'
+vim.cmd 'autocmd BufWritePre *.py lua vim.lsp.buf.format(nil, 100)'
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true

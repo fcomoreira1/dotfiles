@@ -22,43 +22,58 @@ local plugins = {
   "neovim/nvim-lspconfig",
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "hrsh7th/cmp-cmdline",
-  "hrsh7th/cmp-omni",
-  "SirVer/ultisnips",
-  "quangnguyen30192/cmp-nvim-ultisnips",
-  "ray-x/lsp_signature.nvim",
-  "j-hui/fidget.nvim",
-
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-omni",
+      {
+        "L3MON4D3/LuaSnip",
+        build = "make install_jsregexp"
+      },
+      "ray-x/lsp_signature.nvim",
+      "saadparwaiz1/cmp_luasnip",
+    },
+  },
   -- File Type Specific
   --  "Vimjas/vim-python-pep8-indent"
   "lervag/vimtex",
-  "vimwiki/vimwiki",
-  "windwp/nvim-ts-autotag",
-  "nvim-neorg/neorg",
-  "whonore/Coqtail",
+  -- "vimwiki/vimwiki",
+  -- "windwp/nvim-ts-autotag",
+  -- "nvim-neorg/neorg",
+  -- "whonore/Coqtail",
 
   -- Visual
+  -- { 'projekt0n/github-nvim-theme' },
+  { "catppuccin/nvim", name = "catppuccin" },
   "nvim-lualine/lualine.nvim",
-  "akinsho/nvim-bufferline.lua",
-  "norcalli/nvim-colorizer.lua",
-  "navarasu/onedark.nvim",
+  {
+    "akinsho/nvim-bufferline.lua",
+    dependencies = {
+      "catppuccin"
+    }
+  },
+  -- "norcalli/nvim-colorizer.lua",
 
   -- Miscellanea
   "b3nj5m1n/kommentary",
   "kyazdani42/nvim-tree.lua",
   "mhinz/vim-startify",
-  "kdheepak/lazygit.nvim",
   "akinsho/toggleterm.nvim",
-  "lukas-reineke/indent-blankline.nvim",
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("ibl").setup {}
+    end,
+  },
   "windwp/nvim-autopairs",
-  "antoinemadec/FixCursorHold.nvim",
   "kosayoda/nvim-lightbulb",
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.1',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
@@ -68,8 +83,30 @@ local plugins = {
       require("trouble").setup {}
     end,
   },
-  "danymat/neogen",
-  "mbbill/undotree",
+  {
+    "danymat/neogen",
+    config = function()
+      require('neogen').setup {}
+    end,
+  },
+  {
+    "AckslD/swenv.nvim",
+    dependencies = { "stevearc/dressing.nvim" },
+    config = function()
+      require('swenv').setup({
+        -- Should return a list of tables with a `name` and a `path` entry each.
+        -- Gets the argument `venvs_path` set below.
+        -- By default just lists the entries in `venvs_path`.
+        get_venvs = function(venvs_path)
+          return require('swenv.api').get_venvs(venvs_path)
+        end,
+        -- Path passed to `get_venvs`.
+        venvs_path = vim.fn.expand('~/venvs'),
+        -- Something to do after setting an environment, for example call vim.cmd.LspRestart
+        post_set_venv = nil,
+      })
+    end,
+  }
 }
 
 local opts = {}

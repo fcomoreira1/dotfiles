@@ -4,6 +4,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.directory = "/home/fcomoreira/.vim/.tmp/"
 vim.opt.backup = false
+vim.opt.cmdheight = 0
+vim.opt.confirm = true
 vim.opt.undodir = "/home/fcomoreira/.vim/.undo/"
 vim.o.updatetime = 250
 vim.opt.undofile = true
@@ -22,6 +24,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.showmode = false
 vim.opt.wildmode = "longest:full,full"
+vim.opt.shell = 'zsh'
 vim.opt.wrap = false
 vim.opt.iskeyword:append("-")
 vim.opt.termguicolors = true
@@ -38,8 +41,8 @@ vim.opt.laststatus = 3
 vim.o.winbar = "%{%v:lua.require'user.winbar'.eval()%}"
 
 -- nvim cmp
-vim.opt.completeopt = { "menuone", "noselect" }
--- vim.opt.shortmess:append "c"
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.shortmess:append "c"
 
 
 local vim = vim

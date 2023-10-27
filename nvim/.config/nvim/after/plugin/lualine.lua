@@ -175,8 +175,10 @@ ins_left {
   icon = ' LSP:',
   color = { fg = '#ffffff', gui = 'bold' },
 } ]]
-
 -- Add components to right sections
+ins_right {
+  'swenv'
+}
 ins_right {
   'o:encoding', -- option component same as &encoding in viml
   fmt = string.upper, -- I'm not sure why it's upper case either ;)
@@ -222,7 +224,10 @@ ins_right {
 lualine.setup {
   options = {
     icons_enabled = false,
-    theme = 'onedark',
+    theme = 'catppuccin',
+    sections = {
+      lualine_a = 'swenv',
+    },
     component_separators = '|',
     section_separators = '',
   }

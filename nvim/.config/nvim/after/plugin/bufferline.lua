@@ -1,5 +1,6 @@
 require 'nvim-web-devicons'.get_icons()
 require('bufferline').setup {
+  highlights = require("catppuccin.groups.integrations.bufferline").get(),
   options = {
     offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
     view = "default",
