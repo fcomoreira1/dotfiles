@@ -14,7 +14,7 @@
 window {
     margin: 5px;
     background-color: @background;
-    font-family: Inter Medium;
+    font-family: Inter Medium, JetBrainsMono Nerd Font;
     border-radius: 5px;
 }
 .entry {

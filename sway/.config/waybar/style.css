@@ -1,6 +1,10 @@
-@define-color background #1e222a;
-@define-color background-alt  #282c34;
+/* @define-color background #1e222a;
+@define-color background-alt  #282c34; 
 @define-color foreground  #abb2bf;
+@define-color gray  #353b45; */
+@define-color background  #1e1e2e;
+@define-color background-alt  #11111B;
+@define-color foreground  #CDD6F4;
 @define-color foreground-bright  #e6efff;
 @define-color blue  #5e81ac;
 @define-color cyan  #56b6c2;
@@ -8,15 +12,18 @@
 @define-color yellow  #e5c07b;
 @define-color magenta  #c678dd;
 @define-color orange  #d19a66;
-@define-color gray  #353b45;
+@define-color gray  #45475A;
 @define-color green  #98c379;
+
+* { all: initial; }
 
 * {
     border: none;
     border-radius: 0;
     font-family: Inter Medium, JetBrainsMono Nerd Font;
-    font-size: 13.5px;
-    min-height: 0;
+    font-size: 16px;
+    color: @foreground-bright;
+    min-height: 24px;
 }
 
 window#waybar {
@@ -33,13 +40,13 @@ window#waybar {
 }
 #workspaces button {
     padding: 0 10px;
-    color: @foreground-bright;
+    /* color: @foreground-bright; */
 }
 
 #workspaces button.focused {
-    color: @background;
     background-color: @foreground;
     border-radius: 5px;
+    color: @background;
 }
 
 #workspaces button:hover{

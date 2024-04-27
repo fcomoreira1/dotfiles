@@ -1,5 +1,6 @@
 set $mod Mod4
 set $alt Mod1
+set $terminal kitty
 
 bindsym $mod+a focus parent
 bindsym $mod+c focus child
@@ -82,8 +83,7 @@ assign [class="Wine"] 8
 # Launch apps
 ###############################################################
 
-bindsym $mod+Return exec --no-startup-id  alacritty -e fish
-bindsym $mod+Shift+Return exec --no-startup-id alacritty -e fish -c wiki
+bindsym $mod+Return exec --no-startup-id $terminal 
 bindsym $mod+i exec brave-browser 
 bindsym $mod+Shift+i exec brave-browser --incognito
 bindsym $mod+d exec dmenu_run 

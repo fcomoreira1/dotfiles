@@ -116,16 +116,3 @@ fi
 
 #ignore upper and lower case when TAB completion
 bind "set completion-ignore-case on"
-
-# alias wifi='nmcli c'
-# alias ..='cd ..'
-# alias ...='cd ../..'
-# alias vim='nvim'
-# alias py3="python3"
-# alias mtex="nvim /home/fcomoreira/texmf/tex/latex/local/moreira.sty"
-# alias lazyconfig='lazygit --git-dir=$HOME/dotfiles --work-tree=$HOME'
-# alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
-# export EDITOR="nvim"
-# export PDFVIEWER='zathura'
-# export GROFF_NO_SGR='1'

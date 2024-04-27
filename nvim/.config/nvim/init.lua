@@ -17,6 +17,7 @@ local plugins = {
   -- Treesitter
   "nvim-treesitter/nvim-treesitter",
   "nvim-treesitter/nvim-treesitter-context",
+  "nvim-treesitter/nvim-treesitter-textobjects",
 
   -- LSP
   "neovim/nvim-lspconfig",
@@ -31,12 +32,33 @@ local plugins = {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-omni",
       {
+        "zbirenbaum/copilot-cmp",
+        dependencies = { "copilot.lua" },
+        config = function()
+          require("copilot_cmp").setup()
+        end
+      },
+      {
         "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp"
+        -- build = "make install_jsregexp"
       },
       "ray-x/lsp_signature.nvim",
       "saadparwaiz1/cmp_luasnip",
     },
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    -- event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+        filetypes = {
+          tex = false,
+        }
+      })
+    end,
   },
   -- File Type Specific
   --  "Vimjas/vim-python-pep8-indent"
@@ -53,13 +75,27 @@ local plugins = {
   {
     "akinsho/nvim-bufferline.lua",
     dependencies = {
-      "catppuccin"
+      "catppuccin",
+      "nvim-tree/nvim-web-devicons",
     }
   },
   -- "norcalli/nvim-colorizer.lua",
 
   -- Miscellanea
-  "b3nj5m1n/kommentary",
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      'kevinhwang91/promise-async'
+    }
+  },
+  {
+    "b3nj5m1n/kommentary",
+    config = function()
+      require('kommentary.config').configure_language("default", {
+        prefer_single_line_comments = true,
+      })
+    end,
+  },
   "kyazdani42/nvim-tree.lua",
   "mhinz/vim-startify",
   "akinsho/toggleterm.nvim",
@@ -73,7 +109,7 @@ local plugins = {
   "kosayoda/nvim-lightbulb",
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {

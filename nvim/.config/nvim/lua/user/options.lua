@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.directory = "/home/fcomoreira/.vim/.tmp/"
 vim.opt.backup = false
-vim.opt.cmdheight = 0
+-- vim.opt.cmdheight = 0
 vim.opt.confirm = true
 vim.opt.undodir = "/home/fcomoreira/.vim/.undo/"
 vim.o.updatetime = 250
@@ -30,11 +30,16 @@ vim.opt.iskeyword:append("-")
 vim.opt.termguicolors = true
 
 -- Folding
-vim.opt.foldenable = false
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldtext = "substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend))"
-vim.opt.fillchars = "fold: "
+--[[ vim.opt.foldenable = true
+vim.opt.foldmethod = "indent" ]]
+--[[ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldtext = "substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend))" ]]
+-- vim.opt.fillchars = "fold: "
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.opt.foldcolumn = "1" -- '0' is not bad
+vim.opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 -- Single Bar and Winbar
 vim.opt.laststatus = 3

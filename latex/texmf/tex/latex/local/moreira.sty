@@ -271,6 +271,7 @@
     \providecommand{\nameProperty}{Property}
 	\providecommand{\nameFact}{Fact}
 	\providecommand{\nameExample}{Example}
+	\providecommand{\nameApplication}{Application}
 	\providecommand{\nameDefinition}{Definition}
 	\providecommand{\nameObs}{Obs}
 	\providecommand{\nameConjecture}{Conjecture}
@@ -310,14 +311,16 @@
 \declaretheorem[style=\styleProp,name=\nameProposition,sibling=theorem]{proposition}
 \declaretheorem[style=\styleProp,name=\nameProposition,numbered=no]{proposition*}
 \declaretheorem[style=\styleNotation,name=\nameNotation,numbered=no]{notation}
-\declaretheorem[style=\styleRemark,name=\nameRemark]{remark}
+\declaretheorem[style=\styleRemark,name=\nameRemark,sibling=theorem]{remark}
 \declaretheorem[style=\styleRemark,name=\nameRemark,numbered=no]{remark*}
 \declaretheorem[style=\styleFact,name=\nameFact,sibling=theorem]{fact}
 
 \declaretheorem[style=\styleEx,name=\nameExample,sibling=theorem]{example}
-\declaretheorem[style=\styleDef,name=\nameDefinition]{definition}
+\declaretheorem[style=\styleEx,name=\nameApplication,sibling=theorem]{application}
+\declaretheorem[style=\styleDef,name=\nameDefinition,sibling=theorem]{definition}
 
 \declaretheorem[style=\styleEx,name=\nameExample,numbered=no]{example*}
+\declaretheorem[style=\styleEx,name=\nameApplication,numbered=no]{application*}
 \declaretheorem[style=\styleObs,name=\nameObs,numbered=no]{obs}
 \declaretheorem[style=\styleObs,name=\nameObs,numbered=no]{obs*}
 \declaretheorem[style=\styleConjecture,name=\nameConjecture,numbered=no]{conjecture}

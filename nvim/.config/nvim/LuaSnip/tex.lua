@@ -90,6 +90,18 @@ return {
     },
     { condition = tex_utils.in_mathzone }
   ),
+  s({ trig = "calf", snippetType = "autosnippet" },
+    {
+      t("\\mathcal{F}"),
+    },
+    { condition = tex_utils.in_mathzone }
+  ),
+  s({ trig = "cale", snippetType = "autosnippet" },
+    {
+      t("\\mathcal{E}"),
+    },
+    { condition = tex_utils.in_mathzone }
+  ),
   s({ trig = "calp", snippetType = "autosnippet" },
     {
       t("\\mathcal{P}"),
@@ -147,6 +159,18 @@ return {
   s({ trig = ";s", snippetType = "autosnippet" },
     {
       t("\\sigma"),
+    },
+    { condition = tex_utils.in_mathzone }
+  ),
+  s({ trig = ";w", snippetType = "autosnippet" },
+    {
+      t("\\omega"),
+    },
+    { condition = tex_utils.in_mathzone }
+  ),
+  s({ trig = ";W", snippetType = "autosnippet" },
+    {
+      t("\\Omega"),
     },
     { condition = tex_utils.in_mathzone }
   ),
@@ -210,6 +234,30 @@ return {
     {
       t("\\infty"),
     },
+    { condition = tex_utils.in_mathzone }
+  ),
+  s({ trig = "oconv", snippetType = "autosnippet" },
+    fmta(
+      [[
+      \overset{<>}{\longrightarrow}<>
+      ]],
+      {
+        i(1),
+        i(0)
+      }
+    ),
+    { condition = tex_utils.in_mathzone }
+  ),
+  s({ trig = "uconv", snippetType = "autosnippet" },
+    fmta(
+      [[
+      \underset{<>}{\longrightarrow}<>
+      ]],
+      {
+        i(1),
+        i(0)
+      }
+    ),
     { condition = tex_utils.in_mathzone }
   ),
   s({ trig = "ff", snippetType = "autosnippet" },

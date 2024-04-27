@@ -12,20 +12,20 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
+export WINEPREFIX="$HOME/.wine winetricks dotnet45 win10"
+export PATH="$HOME/.local/bin:$PATH"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+export LIBVA_DRIVER_NAME=iHD
 
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/projects/lua-language-server/bin/:$HOME/.local/bin:$PATH:$HOME/projects/ltex-ls/bin/"
+    PATH="$HOME/projects/lua-language-server/bin/:$PATH:$HOME/projects/ltex-ls/bin/"
 fi
-XDG_CONFIG_HOME="$HOME/.config"
 if [ -z $DISPLAY ] && [ $(tty) = /dev/tty1 ]; then 
-	export MOZ_ENABLE_WAYLAND=1
-  export GTK_THEME=Adwaita:dark
+  export GTK_THEME="Catppuccin-Mocha-Standard-Blue-Dark"
+  export XDG_SESSION_TYPE=wayland
+  export MOZ_ENABLE_WAYLAND=1
 	export XDG_CURRENT_DESKTOP=sway
-  export TERM=alacritty
-  export TERMINAL="alacritty -e"
-  export EDITOR=nvim
-	export XDG_SESSION_TYPE=wayland
-	exec sway 
+	exec startsway
 fi
 
 alias luamake=/home/fcomoreira/projects/lua-language-server/3rd/luamake/luamake

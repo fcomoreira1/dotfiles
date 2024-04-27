@@ -47,25 +47,33 @@ end
 
 vim.diagnostic.config(config)
 
+
 local on_attach = function(client, bufnr)
+  local builtin = require("telescope.builtin")
   local opts = { buffer = true, noremap = true }
   local keymap = vim.keymap.set
-  keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  keymap("n", "gaL", "<cmd>TroubleToggle workspace_diagnostics<CR>", opts)
-  keymap("n", "gL", "<cmd>TroubleToggle<CR>", opts)
-  keymap("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", opts)
-  keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  keymap("n", "gd", builtin.lsp_definitions, opts)
+  keymap("n", "gt", builtin.lsp_type_definitions, opts)
+  keymap("n", "gI", builtin.lsp_implementations, opts)
+  keymap("n", "gr", builtin.lsp_references, opts)
+  keymap("n", "gD", vim.lsp.buf.declaration, opts)
+  keymap("n", "gl", vim.diagnostic.open_float, opts)
+  keymap("n", "gL", builtin.diagnostics, opts)
+  keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   keymap("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format(nil, 100)<CR>", opts)
-  keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  keymap("n", "<leader>l", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  keymap("n", "<leader>rr", vim.lsp.buf.rename, opts)
+  keymap("n", "K", vim.lsp.buf.hover, opts)
+  keymap("n", "<leader>k", vim.lsp.buf.signature_help, opts)
+  keymap('n', '[d', vim.diagnostic.goto_prev, opts)
+  keymap('n', ']d', vim.diagnostic.goto_next, opts)
   -- lsp_highlight_document(client)
 end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true
+}
+-- require('ufo').setup()
 
 lspconfig.pyright.setup {
   on_attach = on_attach,
@@ -84,16 +92,19 @@ lspconfig.intelephense.setup {
 }
 lspconfig.ocamllsp.setup {
   cmd = { "ocamllsp" },
-  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+  filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", },
   root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
   on_attach = on_attach,
   capabilities = capabilities,
-
 }
 
 lspconfig.clangd.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
 }
 lspconfig.hls.setup {
   on_attach = on_attach,
@@ -143,6 +154,6 @@ vim.cmd 'autocmd BufWritePre *.h lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.js* lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.ts* lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.lua lua vim.lsp.buf.format(nil, 100)'
-vim.cmd 'autocmd BufWritePre *.py lua vim.lsp.buf.format(nil, 100)'
+-- vim.cmd 'autocmd BufWritePre *.py lua vim.lsp.buf.format(nil, 100)'
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
