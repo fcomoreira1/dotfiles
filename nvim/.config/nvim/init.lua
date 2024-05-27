@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   -- Treesitter
-  "nvim-treesitter/nvim-treesitter",
+  { "nvim-treesitter/nvim-treesitter", tag = "v0.9.2" },
   "nvim-treesitter/nvim-treesitter-context",
   "nvim-treesitter/nvim-treesitter-textobjects",
 
@@ -70,7 +70,7 @@ local plugins = {
 
   -- Visual
   -- { 'projekt0n/github-nvim-theme' },
-  { "catppuccin/nvim", name = "catppuccin" },
+  { "catppuccin/nvim",                 name = "catppuccin" },
   "nvim-lualine/lualine.nvim",
   {
     "akinsho/nvim-bufferline.lua",

@@ -20,6 +20,19 @@ local config = {
     header = "",
     prefix = "",
   },
+  inlay_hints = {
+    enabled = true,
+  },
+  -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+  -- Be aware that you also will need to properly configure your LSP server to
+  -- provide the code lenses.
+  codelens = {
+    enabled = false,
+  },
+  -- Enable lsp cursor word highlighting
+  document_highlight = {
+    enabled = true,
+  },
 }
 
 require "lsp_signature".setup({
@@ -32,7 +45,7 @@ require "lsp_signature".setup({
 local function lsp_highlight_document(client)
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.document_highlight then
-    vim.api.nvim_exec(
+    vim.api.nvim_exec2(
       [[
       augroup lsp_document_highlight
       autocmd! * <buffer>
@@ -40,7 +53,7 @@ local function lsp_highlight_document(client)
       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
       ]],
-      false
+      {}
     )
   end
 end
@@ -66,6 +79,7 @@ local on_attach = function(client, bufnr)
   keymap("n", "<leader>k", vim.lsp.buf.signature_help, opts)
   keymap('n', '[d', vim.diagnostic.goto_prev, opts)
   keymap('n', ']d', vim.diagnostic.goto_next, opts)
+  keymap('n', '<leader>ih', "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", opts)
   -- lsp_highlight_document(client)
 end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -104,6 +118,15 @@ lspconfig.clangd.setup {
   cmd = {
     "clangd",
     "--offset-encoding=utf-16",
+  },
+  settings = {
+    codelens = { enable = true },
+    InlayHints = {
+      Designators = true,
+      Enabled = true,
+      ParameterNames = true,
+      DeducedTypes = true,
+    },
   },
 }
 lspconfig.hls.setup {
