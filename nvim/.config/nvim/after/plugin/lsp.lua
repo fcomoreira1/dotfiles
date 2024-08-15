@@ -170,10 +170,10 @@ lspconfig.html.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
-vim.cmd 'autocmd BufWritePre *.cpp lua vim.lsp.buf.format(nil, 100)'
-vim.cmd 'autocmd BufWritePre *.c lua vim.lsp.buf.format(nil, 100)'
-vim.cmd 'autocmd BufWritePre *.hpp lua vim.lsp.buf.format(nil, 100)'
-vim.cmd 'autocmd BufWritePre *.h lua vim.lsp.buf.format(nil, 100)'
+-- vim.cmd 'autocmd BufWritePre *.cpp lua vim.lsp.buf.format(nil, 100)'
+-- vim.cmd 'autocmd BufWritePre *.c lua vim.lsp.buf.format(nil, 100)'
+-- vim.cmd 'autocmd BufWritePre *.hpp lua vim.lsp.buf.format(nil, 100)'
+-- vim.cmd 'autocmd BufWritePre *.h lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.js* lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.ts* lua vim.lsp.buf.format(nil, 100)'
 vim.cmd 'autocmd BufWritePre *.lua lua vim.lsp.buf.format(nil, 100)'
