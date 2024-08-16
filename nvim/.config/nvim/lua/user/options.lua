@@ -11,6 +11,7 @@ vim.o.updatetime = 250
 vim.opt.undofile = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.number = true
@@ -30,16 +31,11 @@ vim.opt.iskeyword:append("-")
 vim.opt.termguicolors = true
 
 -- Folding
---[[ vim.opt.foldenable = true
-vim.opt.foldmethod = "indent" ]]
---[[ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.opt.foldtext = "substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend))" ]]
--- vim.opt.fillchars = "fold: "
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.opt.foldcolumn = "1" -- '0' is not bad
 vim.opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.opt.foldlevelstart = 99
-vim.opt.foldenable = true
+vim.opt.foldenable = false
 
 -- Single Bar and Winbar
 vim.opt.laststatus = 3
