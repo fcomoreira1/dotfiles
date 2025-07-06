@@ -39,15 +39,15 @@
             "exec-if": "pgrep spotify"
         }, 
         "network": {
-            "format-wifi": "  {essid}",
-            "format-ethernet": " {gwaddr}",
+            "format-wifi": "   {essid}",
+            "format-ethernet": "  {gwaddr}",
             "format-disconnected": "⚠ Disconnected",
         },
 
         "backlight": {
             "device": "intel_backlight",
             "format": "{icon}  {percent}%",
-            "format-icons": [""]
+            "format-icons": ["󰃞"]
         },
         "sway/language": {
             "format": "{}",
@@ -81,8 +81,8 @@
         "idle_inhibitor": {
             "format": "{icon}",
             "format-icons": {
-                "activated": "",
-                "deactivated": ""
+                "activated": " ",
+                "deactivated": " "
             }
         },
         "battery": {

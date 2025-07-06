@@ -78,6 +78,10 @@ return {
       { i(1), i(2), rep(1) }
     )
   ),
+  s({ trig = "bf", snippetType = "autosnippet" },
+    fmta([[\mathbf{<>}]], { i(1) }),
+    { condition = tex_utils.in_mathzone }
+  ),
   s({ trig = ";a", snippetType = "autosnippet" },
     {
       t("\\alpha"),
@@ -312,7 +316,7 @@ return {
   s({ trig = "lr|", snippetType = "autosnippet" },
     fmta(
       [[
-      \left| <> \right| <>
+      \left\| <> \right\| <>
       ]],
       {
         i(1),

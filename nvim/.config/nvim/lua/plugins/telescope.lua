@@ -30,7 +30,8 @@ return {
       })
 
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+      vim.keymap.set('n', '<leader>ff', ":Telescope frecency workspace=CWD<CR>", {})
+      vim.keymap.set('n', '<leader>fh', builtin.oldfiles, {})
       vim.keymap.set('n', '<leader>ft', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 
@@ -49,4 +50,18 @@ return {
       end)
     end
   },
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require("telescope").setup({
+        extensions = {
+          frecency = {
+            show_scores = true,
+            show_filter_column = false,
+          },
+        },
+      })
+      require("telescope").load_extension "frecency"
+    end,
+  }
 }

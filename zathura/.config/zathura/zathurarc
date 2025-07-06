@@ -63,7 +63,7 @@ set inputbar-fg                 "#f8f8f2" # Foreground
 set statusbar-bg                "#282a36" # Background
 set statusbar-fg                "#f8f8f2" # Foreground
 
-set highlight-color             "#ffb86c" # Orange
+set highlight-color             "rgba(255, 184, 108, 0.5)" # Orange
 set highlight-active-color      "#ff79c6" # Pink
 
 set default-bg                  "#282a36" # Background
@@ -80,11 +80,11 @@ set render-loading-bg           "#f8f8f2" # Foreground
 set recolor-lightcolor          "#282a36" # Background
 set recolor-darkcolor           "#f8f8f2" # Foreground
 
-set recolor                     "true"
+# set recolor                     "true"
 # set recolor-keephue 			"true"
 set selection-clipboard clipboard
 set sandbox none
-set window-title-basename true
+set window-title-basename false
 
 unmap q
 map Q quit

@@ -55,12 +55,12 @@ return {
         if client.server_capabilities.document_highlight then
           vim.api.nvim_exec2(
             [[
-      augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-      ]],
+              augroup lsp_document_highlight
+              autocmd! * <buffer>
+              autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+              autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+              augroup END
+             ]],
             {}
           )
         end
@@ -68,29 +68,27 @@ return {
 
       vim.diagnostic.config(config)
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLSPConfigs", {}),
-        callback = function(event, _)
-          local on_attach = function(client, bufnr)
-            local builtin = require("telescope.builtin")
-            local opts = { buffer = true, noremap = true }
-            local keymap = vim.keymap.set
-            keymap("n", "gd", builtin.lsp_definitions, opts)
-            keymap("n", "gt", builtin.lsp_type_definitions, opts)
-            keymap("n", "gI", builtin.lsp_implementations, opts)
-            keymap("n", "gr", builtin.lsp_references, opts)
-            keymap("n", "gD", vim.lsp.buf.declaration, opts)
-            keymap("n", "gl", vim.diagnostic.open_float, opts)
-            keymap("n", "gL", builtin.diagnostics, opts)
-            keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-            keymap("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format(nil, 100)<CR>", opts)
-            keymap("n", "<leader>rr", vim.lsp.buf.rename, opts)
-            keymap("n", "K", vim.lsp.buf.hover, opts)
-            keymap("n", "<leader>k", vim.lsp.buf.signature_help, opts)
-            keymap('n', '[d', vim.diagnostic.goto_prev, opts)
-            keymap('n', ']d', vim.diagnostic.goto_next, opts)
-            keymap('n', '<leader>ih', "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", opts)
-            -- lsp_highlight_document(client)
-          end
+        -- group = vim.api.nvim_create_augroup("UserLSPConfigs", {}),
+        callback = function(args)
+          local builtin = require("telescope.builtin")
+          local opts = { buffer = true, noremap = true }
+          local keymap = vim.keymap.set
+          keymap("n", "gd", builtin.lsp_definitions, opts)
+          keymap("n", "gt", builtin.lsp_type_definitions, opts)
+          keymap("n", "gI", builtin.lsp_implementations, opts)
+          keymap("n", "gr", builtin.lsp_references, opts)
+          keymap("n", "gD", vim.lsp.buf.declaration, opts)
+          keymap("n", "gl", vim.diagnostic.open_float, opts)
+          keymap("n", "gL", builtin.diagnostics, opts)
+          keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+          keymap("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format(nil, 100)<CR>", opts)
+          keymap("n", "<leader>rr", vim.lsp.buf.rename, opts)
+          keymap("n", "K", vim.lsp.buf.hover, opts)
+          keymap("n", "<leader>k", vim.lsp.buf.signature_help, opts)
+          keymap('n', '[d', vim.diagnostic.goto_prev, opts)
+          keymap('n', ']d', vim.diagnostic.goto_next, opts)
+          keymap('n', '<leader>ih', "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", opts)
+          -- lsp_highlight_document(client)
         end,
       })
       local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -135,6 +133,8 @@ return {
         capabilities = capabilities,
         cmd = {
           "clangd",
+          "--compile-commands-dir=build", -- Adjust path to your build directory
+          "--background-index",
           "--offset-encoding=utf-16",
         },
         settings = {

@@ -1,4 +1,4 @@
-vim.cmd.colorscheme "catppuccin-mocha"
+-- vim.cmd.colorscheme "catppuccin-mocha"
 
 -- Syntax highlighting
 vim.cmd 'autocmd BufNewFile,BufRead *.rasi setf css'

@@ -7,14 +7,12 @@ set $up k
 set $right l
 set $term kitty
 # set $browser google-chrome --enable-features=WebUIDarkMode --force-dark-mode --enable-features=UseOzonePlatform --ozone-platform=wayland
-# set $browser brave-browser
-# set $browser-icognito $browser --incognito
-set $browser firefox
+set $browser brave-browser
+set $browser-icognito $browser --incognito
+# set $browser firefox
 set $menu bash ~/scripts/menu.sh
 set $lock_bg /home/fcomoreira/pictures/Wallpapers/IMG_5458.JPG
-# set $wallpaper1 /home/fcomoreira/pictures/Wallpapers/samuel-ferrara-1527pjeb6jg-unsplash.jpg
-set $wallpaper1 /home/fcomoreira/pictures/Wallpapers/pexels-muffin-creatives-2468773.jpg
-# set $wallpaper2 /home/fcomoreira/pictures/Wallpapers/planets.png
+set $wallpaper1 /home/fcomoreira/pictures/Wallpapers/wolfgang-hasselmann-V4WGkBGtL-w-unsplash.jpg
 set $laptop eDP-1 
 set $monitor1 HDMI-A-1
 set $monitor2 DP-2 
@@ -247,8 +245,8 @@ font pango:Inter Medium 12
 default_border pixel 3
 default_floating_border pixel 3
 floating_maximum_size 0 x 0
-# smart_gaps on
-smart_borders off
+smart_gaps on
+smart_borders on
 gaps inner 4
 gaps outer 2 
 
@@ -263,13 +261,13 @@ popup_during_fullscreen smart
 # Do on Startup
 
 set $gnome-schema org.gnome.desktop.interface
-seat seat0 xcursor_theme Breeze_Snow 24 
+seat seat0 xcursor_theme breeze_cursors 24 
 
 exec_always {
     gsettings set $gnome-schema gtk-theme Catppuccin-Mocha-Standard-Blue-Dark
     gsettings set $gnome-schema gtk-application-prefer-dark-theme true
     gsettings set $gnome-schema icon-theme Papirus-Dark
-    gsettings set $gnome-schema cursor-theme Breeze_Snow
+    gsettings set $gnome-schema cursor-theme breeze_cursors
     gsettings set $gnome-schema font-name 'Inter 12'
     gsettings set org.gnome.desktop.default-applications.terminal exec $term
     gsettings set org.gnome.desktop.default-applications.terminal exec-arg -e

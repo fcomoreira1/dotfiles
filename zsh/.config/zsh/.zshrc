@@ -24,6 +24,8 @@ zmodload -i zsh/complist
 autoload -Uz vcs_info
 precmd() { vcs_info }
 
+autoload -Uz is-at-least
+
 # setopt PROMPT_SUBST
 # # NEWLINE=$'\n'
 # NEWLINE=''
@@ -95,9 +97,9 @@ source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
       eval "$__conda_setup"
   else
       if [ -f "/home/fcomoreira/miniconda3/etc/profile.d/conda.sh" ]; then
-# . "/home/fcomoreira/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
+. "/home/fcomoreira/miniconda3/etc/profile.d/conda.sh"
       else
-# export PATH="/home/fcomoreira/miniconda3/bin:$PATH"  # commented out by conda initialize
+export PATH="/home/fcomoreira/miniconda3/bin:$PATH"
       fi
   fi
   unset __conda_setup
@@ -109,3 +111,4 @@ source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # Prompt
 #########################################
 eval "$(starship init zsh)"
+export SUPABASE_SERVICE_ROLE_KEY="sbp_3c61a0fa3051d71c00c7b5d915793a6d36afd776"

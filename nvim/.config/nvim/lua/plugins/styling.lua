@@ -1,10 +1,20 @@
 return
 {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'navarasu/onedark.nvim',
     priority = 1000,
+    config = function()
+      require('onedark').setup({
+        style = 'darker'
+      })
+      require('onedark').load()
+    end
   },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  -- },
   {
     "nvim-lualine/lualine.nvim",
     config = function()
@@ -12,7 +22,7 @@ return
 
       lualine.setup {
         options = {
-          theme = 'catppuccin',
+          theme = 'onedark',
           component_separators = '|',
           section_separators = '',
         },
@@ -34,11 +44,11 @@ return
       config = function()
         require 'nvim-web-devicons'.get_icons()
         vim.opt.termguicolors = true
-        local mocha = require("catppuccin.palettes").get_palette("mocha")
+        -- local mocha = require("catppuccin.palettes").get_palette("mocha")
         require('bufferline').setup {
-          highlights = require("catppuccin.groups.integrations.bufferline").get({
-            styles = { "bold" },
-          }),
+          -- highlights = require("catppuccin.groups.integrations.bufferline").get({
+          --   styles = { "bold" },
+          -- }),
           options = {
             offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
             separator = "thick",
@@ -53,7 +63,7 @@ return
         vim.api.nvim_set_keymap('n', 'gb', ':BufferLinePick<CR>', { noremap = true })
       end,
       dependencies = {
-        "catppuccin",
+        -- "catppuccin",
         "nvim-tree/nvim-web-devicons",
       }
     }
